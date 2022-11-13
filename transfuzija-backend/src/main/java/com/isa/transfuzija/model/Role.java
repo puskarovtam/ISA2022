@@ -2,33 +2,27 @@ package com.isa.transfuzija.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.isa.transfuzija.enums.RoleName;
 
 @Entity
 @Table(name = "roles")
-public class Role implements GrantedAuthority {
-
-	private static final long serialVersionUID = 1L;
+public class Role {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "role_id")
 	private Long id;
+	@Enumerated(EnumType.STRING)
 	@Column(name = "role_name")
-	private String roleName;
-
-	@JsonIgnore
-	@Override
-	public String getAuthority() {
-		return roleName;
-	}
+	private RoleName roleName;
 
 	@JsonIgnore
 	public Long getId() {
@@ -39,11 +33,11 @@ public class Role implements GrantedAuthority {
 		this.id = id;
 	}
 
-	public String getRoleName() {
+	public RoleName getRoleName() {
 		return roleName;
 	}
 
-	public void setRoleName(String roleName) {
+	public void setRoleName(RoleName roleName) {
 		this.roleName = roleName;
 	}
 

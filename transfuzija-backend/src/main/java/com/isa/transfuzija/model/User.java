@@ -34,6 +34,8 @@ public class User {
 	private String address;
 	@Column(name = "user_city")
 	private String city;
+	@Column(name = "user_country")
+	private String country;
 	@Column(name = "user_phone_number")
 	private String phoneNumber;
 	@Column(name = "user_enabled")
@@ -99,6 +101,14 @@ public class User {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public String getPhoneNumber() {
