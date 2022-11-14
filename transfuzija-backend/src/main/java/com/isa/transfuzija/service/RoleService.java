@@ -1,13 +1,15 @@
 package com.isa.transfuzija.service;
 
 import java.util.Optional;
+import java.util.Set;
 
+import com.isa.transfuzija.enums.RoleName;
 import com.isa.transfuzija.model.Role;
 
 public interface RoleService {
 
 	Optional<Role> findById(Long id);
 
-	Optional<Role> findByName(String name);
+	Set<Role> findByName(RoleName role);
 
 }

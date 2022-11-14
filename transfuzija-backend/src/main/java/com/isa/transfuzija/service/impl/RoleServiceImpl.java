@@ -1,10 +1,12 @@
 package com.isa.transfuzija.service.impl;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.isa.transfuzija.enums.RoleName;
 import com.isa.transfuzija.model.Role;
 import com.isa.transfuzija.repository.RoleRepository;
 import com.isa.transfuzija.service.RoleService;
@@ -22,8 +24,8 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public Optional<Role> findByName(String name) {
-		return roleRepository.findByRoleName(null);
+	public Set<Role> findByName(RoleName name) {
+		return roleRepository.findByRoleName(name);
 	}
 
 }
