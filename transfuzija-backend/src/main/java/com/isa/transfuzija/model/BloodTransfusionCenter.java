@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "blood_transfusion_centers")
 public class BloodTransfusionCenter {
@@ -32,6 +34,7 @@ public class BloodTransfusionCenter {
 	private String description;
 	@Column(name = "transfusion_rating")
 	private Double rating = 0.0;
+	@JsonIgnore
 	@OneToMany(mappedBy = "transfusionCenter", cascade = CascadeType.ALL)
 	private List<BloodCenterAdministrator> bloodCenterAdministrators = new ArrayList<>();
 
