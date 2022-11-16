@@ -7,17 +7,33 @@
                     <div class="row">
                         <div class="col-md-9 col-lg-8 mx-auto">
                             <h3 class="login-heading mb-4">Welcome back! Login to BLOOD DONOR</h3>
-                            <form>
+                            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                                 <div class="form-floating mb-3">
-                                    <input type="email" name="email" class="form-control" id="email"
+                                    <input type="email" name="email"
+                                        [ngClass]="{'is-invalid': submitted && loginForm.controls.email.errors }"
+                                        class="form-control" id="email" formControlName="email"
                                         placeholder="name@example.com">
                                     <label for="email">Email address</label>
+                                    <div *ngIf="submitted && loginForm.controls.email.errors" class="invalid-feedback">
+                                        <div *ngIf="loginForm.controls.email.errors.required">Email is required.</div>
+                                        <div *ngIf="loginForm.controls.email.errors.email">Email must be a valid email
+                                            address.</div>
+                                    </div>
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <input type="password" name="password" class="form-control" id="password"
+                                    <input type="password" name="password"
+                                        [ngClass]="{'is-invalid': submitted && loginForm.controls.password.errors}"
+                                        class="form-control" id="password" formControlName="password"
                                         placeholder="Password">
                                     <label for="password">Password</label>
+                                    <div *ngIf="submitted && loginForm.controls.password.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="loginForm.controls.password.errors.required">Password is required.
+                                        </div>
+                                        <div *ngIf="loginForm.controls.password.errors.minlength">Password is at least 6
+                                            characters long.</div>
+                                    </div>
                                 </div>
 
                                 <div class="d-grid">

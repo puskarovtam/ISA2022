@@ -1,12 +1,17 @@
 package com.isa.transfuzija.controller;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,14 +19,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.transfuzija.dto.LoginDTO;
 import com.isa.transfuzija.dto.RegisterDTO;
 import com.isa.transfuzija.model.BloodCenterAdministrator;
 import com.isa.transfuzija.model.SystemAdministrator;
 import com.isa.transfuzija.model.User;
 import com.isa.transfuzija.repository.RoleRepository;
 import com.isa.transfuzija.repository.UserRepository;
+import com.isa.transfuzija.response.JwtResponse;
 import com.isa.transfuzija.response.MessageResponse;
 import com.isa.transfuzija.security.jwt.JwtUtils;
+import com.isa.transfuzija.security.service.UserDetailsImpl;
 import com.isa.transfuzija.service.UserService;
 
 @RestController
@@ -55,6 +63,22 @@ public class AuthenticationController {
 		userService.save(registerDTO);
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 
+	}
+
+	@PostMapping("/login")
+	public ResponseEntity<?> loginUser(@Valid @RequestBody LoginDTO loginDTO) {
+		Authentication authentication = authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
+
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		String jwt = jwtUtils.generateJwtToken(authentication);
+
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		Set<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
+				.collect(Collectors.toSet());
+
+		return ResponseEntity.ok(
+				new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
 	}
 
 	@PostMapping("/addAdmin")

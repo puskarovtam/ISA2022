@@ -8,3 +8,8 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
+
+button {
+  line-height: 40px;
+  width: 250px;
+}

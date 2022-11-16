@@ -1,3 +1,56 @@
 <header class="ps-md-0">
     <img class="center" src="assets/images/header.png" alt="homepage">
 </header>
+
+<div class="container mt-6">
+    <div class="d-flex justify-content-center">
+        <div class="card-body">
+            <h5 class="card-title">Search blood transfusion centers</h5>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="name" class="form-control">
+                        <label for="name">Name of the center</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="city" class="form-control">
+                        <label for="city">City of the center</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="rating" class="form-control">
+                        <label for="rating">Rating of the center</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <button type="button" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container mb-6">
+    <div class="row text-center">
+        <!-- Team item -->
+        <div class="col-xl-3 col-sm-6 mb-5" *ngFor="let bloodCenter of bloodCenters">
+            <div class="bg-white rounded shadow-sm py-5 px-4">
+                <h5 class="mb-0">{{bloodCenter.name}}</h5>
+                <span class="small text-uppercase text-muted">{{bloodCenter.address}}, {{bloodCenter.city}},
+                    {{bloodCenter.country}}</span>
+                <hr>
+                <p style="text-align: left;">{{bloodCenter.description}}</p>
+                <ul class="social mb-0 list-inline mt-3">
+                    <li class="list-inline-item"><a href="#" class="social-link"><i class="fa-solid fa-circle-info"></i></a></li>
+                    <!-- <li class="list-inline-item"><a href="#" class="social-link">jos jedno dugme</a></li> -->
+                </ul>
+            </div>
+        </div><!-- End -->
+    </div>
+</div>
