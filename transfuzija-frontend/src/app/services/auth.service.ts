@@ -21,4 +21,8 @@ export class AuthService {
   login(loginDTO: any): Observable<any> {
     return this.http.post(AUTH_API + 'login', loginDTO, httpOptions);
   }
+
+  find(id: any){
+    return this.http.get(`${AUTH_API} + ${id}`);
+  }
 }

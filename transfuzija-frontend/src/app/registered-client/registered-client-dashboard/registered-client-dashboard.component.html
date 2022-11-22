@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-sm-3" style="height: 94vh;">
+        <div class="d-flex flex-column flex-shrink-0 p-3 sidebar"
+            style="width: 300px; background-color:rgb(225, 238, 252);">
+            <p class="mt-2"><strong>GENERAL</strong></p>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" [routerLink]="['./centers']"><i
+                            class="fa-solid fa-house-chimney-crack me-2"></i>
+                        Centri za transfuziju krvi</a>
+                </li>
+                <li>
+                    <a class="nav-link text-dark" [routerLink]="['./questionnaire']"><i
+                            class="fa-solid fa-clipboard-question me-2"></i> Upitnik
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <p><strong>REZERVACIJE</strong></p>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" [routerLink]="['./history']"><i class="fa-solid fa-hospital me-2"></i> Istorija
+                        poseta centrima</a>
+                </li>
+                <li>
+                    <a class="nav-link text-dark" [routerLink]="['./reservations']"><i
+                            class="fa-solid fa-book-medical me-2"></i> Zakazane posete centrima</a>
+                </li>
+                <li>
+                    <a class="nav-link text-dark" [routerLink]="['./complains']"><i
+                            class="fa-solid fa-book-bookmark me-2"></i> Žalbe
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong>username</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gears me-2"></i> Settings</a></li>
+                    <li><a class="dropdown-item" [routerLink]="['./profile']"><i class="fa-solid fa-address-card me-2"></i> Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-right-from-bracket me-2"></i> Sign
+                            out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <router-outlet></router-outlet>
+    </div>
+</div>

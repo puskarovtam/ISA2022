@@ -42,7 +42,13 @@ export class LoginComponent implements OnInit {
       (data) => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
-        this.router.navigate(['']);
+        if (this.tokenStorage.getUser().roles == "CENTER_ADMINISTRATOR") {
+          this.router.navigate(['blood-center-admin']);
+        } else if (this.tokenStorage.getUser().roles == "SYSTEM_ADMINISTRATOR") {
+          this.router.navigate(['system-admin']);
+        } else if (this.tokenStorage.getUser().roles == "REGISTERED_CLIENT"){
+          this.router.navigate(['registered-client']);
+        }
       },
       (err) => {
         console.log(err);
