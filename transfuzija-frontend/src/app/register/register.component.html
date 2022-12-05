@@ -6,20 +6,20 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-9 col-lg-8 mx-auto">
-                            <h3 class="login-heading mb-4">Register on BLOOD DONOR</h3>
+                            <h3 class="login-heading mb-4">Registerujte se na BLOOD DONOR</h3>
                             <!-- Sign In Form -->
                             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                                 <div class="form-floating mb-3">
                                     <input type="email" name="email"
                                         [ngClass]="{'is-invalid': submitted && registerForm.controls.email.errors }"
                                         class="form-control" formControlName="email" placeholder="name@example.com">
-                                    <label for="email">Email address</label>
+                                    <label for="email">Email adresa</label>
                                     <div *ngIf="submitted && registerForm.controls.email.errors"
                                         class="invalid-feedback">
-                                        <div *ngIf="registerForm.controls.email.errors.required">Email is required.
+                                        <div *ngIf="registerForm.controls.email.errors.required">Email je obavezan.
                                         </div>
-                                        <div *ngIf="registerForm.controls.email.errors.email">Email must be a valid
-                                            email address.</div>
+                                        <div *ngIf="registerForm.controls.email.errors.email">Email mora da bude validna
+                                            email adresa.</div>
                                     </div>
                                 </div>
 
@@ -33,11 +33,11 @@
                                             <label for="password">Password</label>
                                             <div *ngIf="submitted && registerForm.controls.password.errors"
                                                 class="invalid-feedback">
-                                                <div *ngIf="registerForm.controls.password.errors.required">Password is
-                                                    required.
+                                                <div *ngIf="registerForm.controls.password.errors.required">Password je
+                                                    obavezan.
                                                 </div>
-                                                <div *ngIf="registerForm.controls.password.errors.minlength">Password is
-                                                    at least 6 characters long.</div>
+                                                <div *ngIf="registerForm.controls.password.errors.minlength">Password
+                                                    mora da sadrži najmanje 6 karaktera.</div>
                                             </div>
                                         </div>
                                     </div>
@@ -47,15 +47,15 @@
                                                 [ngClass]="{'is-invalid': submitted && registerForm.controls.repeat.errors }"
                                                 class="form-control" formControlName="repeat" id="repeat"
                                                 placeholder="Password">
-                                            <label for="repeat">Repeat password</label>
+                                            <label for="repeat">Ponovite password</label>
                                             <div *ngIf="submitted && registerForm.controls.repeat.errors"
                                                 class="invalid-feedback">
-                                                <div *ngIf="registerForm.controls.repeat.errors.required">Confirm
-                                                    password is required.</div>
-                                                <div *ngIf="registerForm.controls.repeat.errors.minlength">Confirm
-                                                    password is at least 6 characters long.</div>
-                                                <div *ngIf="registerForm.controls.repeat.errors.mustMatch">Passwords
-                                                    must match.
+                                                <div *ngIf="registerForm.controls.repeat.errors.required">Password je
+                                                    obavezan.</div>
+                                                <div *ngIf="registerForm.controls.repeat.errors.minlength">Password
+                                                    mora da sadrži najmanje 6 karaktera.</div>
+                                                <div *ngIf="registerForm.controls.repeat.errors.mustMatch">Passwordi
+                                                    moraju da se poklapaju.
                                                 </div>
                                             </div>
                                         </div>
@@ -69,11 +69,11 @@
                                                 [ngClass]="{'is-invalid': submitted && registerForm.controls.name.errors }"
                                                 class="form-control" formControlName="name" id="name"
                                                 placeholder="Enter your name">
-                                            <label for="name">Name</label>
+                                            <label for="name">Ime</label>
                                             <div *ngIf="submitted && registerForm.controls.name.errors"
                                                 class="invalid-feedback">
-                                                <div *ngIf="registerForm.controls.name.errors.required">Name is
-                                                    required.</div>
+                                                <div *ngIf="registerForm.controls.name.errors.required">Ime je obavezno.
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -83,12 +83,11 @@
                                                 [ngClass]="{'is-invalid': submitted && registerForm.controls.surname.errors }"
                                                 class="form-control" formControlName="surname" id="surname"
                                                 placeholder="Enter your surname">
-                                            <label for="surname">Surname</label>
+                                            <label for="surname">Prezime</label>
                                             <div *ngIf="submitted && registerForm.controls.surname.errors"
                                                 class="invalid-feedback">
-                                                <div *ngIf="registerForm.controls.surname.errors.required">Surname is
-                                                    required.
-                                                </div>
+                                                <div *ngIf="registerForm.controls.surname.errors.required">Prezime je
+                                                    obavezno.</div>
                                             </div>
                                         </div>
                                     </div>
@@ -99,10 +98,10 @@
                                         [ngClass]="{'is-invalid': submitted && registerForm.controls.address.errors }"
                                         class="form-control" formControlName="address" id="address"
                                         placeholder="Enter your address">
-                                    <label for="address">Address</label>
+                                    <label for="address">Adresa</label>
                                     <div *ngIf="submitted && registerForm.controls.address.errors"
                                         class="invalid-feedback">
-                                        <div *ngIf="registerForm.controls.address.errors.required">Address is required.
+                                        <div *ngIf="registerForm.controls.address.errors.required">Adresa je obavezna.
                                         </div>
                                     </div>
                                 </div>
@@ -114,11 +113,11 @@
                                                 [ngClass]="{'is-invalid': submitted && registerForm.controls.city.errors }"
                                                 class="form-control" formControlName="city" id="city"
                                                 placeholder="Enter your city">
-                                            <label for="city">City</label>
+                                            <label for="city">Grad</label>
                                             <div *ngIf="submitted && registerForm.controls.city.errors"
                                                 class="invalid-feedback">
-                                                <div *ngIf="registerForm.controls.city.errors.required">City is
-                                                    required.</div>
+                                                <div *ngIf="registerForm.controls.city.errors.required">Grad je
+                                                    obavezan.</div>
                                             </div>
                                         </div>
                                     </div>
@@ -128,12 +127,11 @@
                                                 [ngClass]="{'is-invalid': submitted && registerForm.controls.country.errors }"
                                                 class="form-control" formControlName="country" id="country"
                                                 placeholder="Enter your country">
-                                            <label for="country">Country</label>
+                                            <label for="country">Država</label>
                                             <div *ngIf="submitted && registerForm.controls.country.errors"
                                                 class="invalid-feedback">
-                                                <div *ngIf="registerForm.controls.country.errors.required">Country is
-                                                    required.
-                                                </div>
+                                                <div *ngIf="registerForm.controls.country.errors.required">Država je
+                                                    obavezna.</div>
                                             </div>
                                         </div>
                                     </div>
@@ -144,11 +142,11 @@
                                         [ngClass]="{'is-invalid': submitted && registerForm.controls.phoneNumber.errors }"
                                         class="form-control" formControlName="phoneNumber" id="phoneNumber"
                                         placeholder="Enter your phone number">
-                                    <label for="phone">Phone number</label>
+                                    <label for="phone">Telefon</label>
                                     <div *ngIf="submitted && registerForm.controls.phoneNumber.errors"
                                         class="invalid-feedback">
-                                        <div *ngIf="registerForm.controls.phoneNumber.errors.required">Phone number is required.
-                                        </div>
+                                        <div *ngIf="registerForm.controls.phoneNumber.errors.required">Telefon je
+                                            obavezan.</div>
                                     </div>
                                 </div>
 
@@ -162,8 +160,8 @@
                                             <label for="jmbg">JMBG</label>
                                             <div *ngIf="submitted && registerForm.controls.jmbg.errors"
                                                 class="invalid-feedback">
-                                                <div *ngIf="registerForm.controls.jmbg.errors.required">JMBG is
-                                                    required.
+                                                <div *ngIf="registerForm.controls.jmbg.errors.required">JMBG je
+                                                    obavezan.
                                                 </div>
                                             </div>
                                         </div>
@@ -173,15 +171,14 @@
                                             <select class="form-select"
                                                 [ngClass]="{'is-invalid': submitted && registerForm.controls.gender.errors }"
                                                 formControlName="gender" id="gender">
-                                                <option value="FEMALE">female</option>
-                                                <option value="MALE">male</option>
+                                                <option value="FEMALE">ženski</option>
+                                                <option value="MALE">muški</option>
                                             </select>
-                                            <label for="gender">Gender</label>
+                                            <label for="gender">Pol</label>
                                             <div *ngIf="submitted && registerForm.controls.gender.errors"
                                                 class="invalid-feedback">
-                                                <div *ngIf="registerForm.controls.gender.errors.required">Gender is
-                                                    required.
-                                                </div>
+                                                <div *ngIf="registerForm.controls.gender.errors.required">Pol je
+                                                    obavezan.</div>
                                             </div>
                                         </div>
                                     </div>
@@ -191,24 +188,26 @@
                                                 [ngClass]="{'is-invalid': submitted && registerForm.controls.occupation.errors }"
                                                 class="form-control" formControlName="occupation" id="occupation"
                                                 placeholder="Enter your occupation">
-                                            <label for="occupation">Occupation</label>
+                                            <label for="occupation">Zanimanje</label>
                                             <div *ngIf="submitted && registerForm.controls.occupation.errors"
                                                 class="invalid-feedback">
-                                                <div *ngIf="registerForm.controls.occupation.errors.required">Occupation
-                                                    is required.
-                                                </div>
+                                                <div *ngIf="registerForm.controls.occupation.errors.required">Zanimanje
+                                                    je obavezno.</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <textarea [ngClass]="{'is-invalid': submitted && registerForm.controls.jobInformation.errors }"
-                                        class="form-control" formControlName="jobInformation" id="jobInformation" rows="3"></textarea>
-                                    <label for="jobInformation">Job information</label>
-                                    <div *ngIf="submitted && registerForm.controls.jobInformation.errors" class="invalid-feedback">
-                                        <div *ngIf="registerForm.controls.jobInformation.errors.required">Job information is
-                                            required.
+                                    <textarea
+                                        [ngClass]="{'is-invalid': submitted && registerForm.controls.jobInformation.errors }"
+                                        class="form-control" formControlName="jobInformation" id="jobInformation"
+                                        rows="3"></textarea>
+                                    <label for="jobInformation">Informacije o poslu</label>
+                                    <div *ngIf="submitted && registerForm.controls.jobInformation.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="registerForm.controls.jobInformation.errors.required">Informacije o
+                                            poslu su obavezne.
                                         </div>
                                     </div>
                                 </div>

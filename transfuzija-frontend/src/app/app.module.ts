@@ -20,6 +20,7 @@ import { RegisteredClientQuestionnaireComponent } from './registered-client/regi
 import { RegisteredClientReservationsComponent } from './registered-client/registered-client-reservations/registered-client-reservations.component';
 import { SystemAdminDashboardComponent } from './system-admin/system-admin-dashboard/system-admin-dashboard.component';
 import { SystemAdminProfileComponent } from './system-admin/system-admin-profile/system-admin-profile.component';
+import { FilterPipe } from './helpers/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { SystemAdminProfileComponent } from './system-admin/system-admin-profile
     SystemAdminProfileComponent,
     BloodCenterAdminDashboardComponent,
     BloodCenterAdminProfileComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

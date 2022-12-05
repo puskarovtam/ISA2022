@@ -4,7 +4,7 @@ import { MustMatch } from '../helpers/must-match.validator';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
