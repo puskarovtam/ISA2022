@@ -40,6 +40,8 @@ public class User {
 	private String phoneNumber;
 	@Column(name = "user_enabled")
 	private Boolean enabled = false;
+	@Column(name = "verification_code", length = 64)
+	private String verificationToken;
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
 	private Set<Role> roles;
@@ -125,6 +127,14 @@ public class User {
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public String getVerificationToken() {
+		return verificationToken;
+	}
+
+	public void setVerificationToken(String verificationToken) {
+		this.verificationToken = verificationToken;
 	}
 
 	public Set<Role> getRoles() {

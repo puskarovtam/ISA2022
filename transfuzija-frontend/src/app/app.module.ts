@@ -21,6 +21,8 @@ import { RegisteredClientReservationsComponent } from './registered-client/regis
 import { SystemAdminDashboardComponent } from './system-admin/system-admin-dashboard/system-admin-dashboard.component';
 import { SystemAdminProfileComponent } from './system-admin/system-admin-profile/system-admin-profile.component';
 import { FilterPipe } from './helpers/filter.pipe';
+import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
+import { ActivateEmailComponent } from './activate-email/activate-email.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { FilterPipe } from './helpers/filter.pipe';
     BloodCenterAdminDashboardComponent,
     BloodCenterAdminProfileComponent,
     FilterPipe,
+    RegistrationSuccessComponent,
+    ActivateEmailComponent,
   ],
   imports: [
     BrowserModule,

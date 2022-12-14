@@ -12,7 +12,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   register(registerDTO: any): Observable<any> {
     return this.http.post(AUTH_API + 'register', registerDTO, httpOptions);
@@ -22,7 +22,12 @@ export class AuthService {
     return this.http.post(AUTH_API + 'login', loginDTO, httpOptions);
   }
 
-  find(id: any){
+  find(id: any) {
     return this.http.get(`${AUTH_API} + ${id}`);
+  }
+
+  /* Verifikovanje email-a - Aktivacija */
+  activate(verificationToken: any) {
+    return this.http.get(`${AUTH_API}` + `activate/${verificationToken}`, httpOptions)
   }
 }

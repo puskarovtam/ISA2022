@@ -1,5 +1,6 @@
 package com.isa.transfuzija.service.impl;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Set;
 
@@ -18,8 +19,11 @@ import com.isa.transfuzija.repository.BloodCenterAdministratorRepository;
 import com.isa.transfuzija.repository.RegisteredClientRepository;
 import com.isa.transfuzija.repository.SystemAdministratorRepository;
 import com.isa.transfuzija.repository.UserRepository;
+import com.isa.transfuzija.service.EmailService;
 import com.isa.transfuzija.service.RoleService;
 import com.isa.transfuzija.service.UserService;
+
+import net.bytebuddy.utility.RandomString;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -36,6 +40,8 @@ public class UserServiceImpl implements UserService {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private RoleService roleService;
+	@Autowired
+	private EmailService emailService;
 
 	@Override
 	public User findById(Long id) {
@@ -53,7 +59,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User save(RegisterDTO userDTO) {
+	public User save(RegisterDTO userDTO) throws UnsupportedEncodingException {
 		RegisteredClient rc = new RegisteredClient();
 		rc.setEmail(userDTO.getEmail());
 		rc.setPassword(passwordEncoder.encode(userDTO.getPassword()));
@@ -72,6 +78,10 @@ public class UserServiceImpl implements UserService {
 		rc.setJobInformation(userDTO.getJobInformation());
 		rc.setBlocked(false);
 		rc.setPenalties(0);
+		String randomCode = RandomString.make(64);
+		rc.setVerificationToken(randomCode);
+		
+		emailService.sendRegistrationEmail(rc);
 
 		return registeredClientRepository.save(rc);
 	}

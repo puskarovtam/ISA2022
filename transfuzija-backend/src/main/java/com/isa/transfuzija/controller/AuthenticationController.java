@@ -1,5 +1,6 @@
 package com.isa.transfuzija.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -8,6 +9,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -55,14 +57,27 @@ public class AuthenticationController {
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
-	
+
 	@GetMapping("/{id}")
 	public Optional<User> findUser(@PathVariable Long id) {
 		return userRepository.findById(id);
 	}
 
+	@GetMapping("/activate/{verificationToken}")
+	public ResponseEntity<User> findUserByVerificationToken(@PathVariable String verificationToken) {
+		User user = userRepository.findByVerificationToken(verificationToken);
+		if (user == null) {
+			return new ResponseEntity<User>(user, HttpStatus.NO_CONTENT);
+		} else {
+			user.setVerificationToken(null);
+			user.setEnabled(true);
+			userRepository.save(user);
+		}
+		return new ResponseEntity<User>(user, HttpStatus.CREATED);
+	}
+
 	@PostMapping("/register")
-	public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterDTO registerDTO) {
+	public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterDTO registerDTO) throws UnsupportedEncodingException {
 		if (userRepository.existsByEmail(registerDTO.getEmail())) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
 		}
@@ -74,18 +89,25 @@ public class AuthenticationController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> loginUser(@Valid @RequestBody LoginDTO loginDTO) {
-		Authentication authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
+		User user = userRepository.findByEmail(loginDTO.getEmail()).get();
 
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		String jwt = jwtUtils.generateJwtToken(authentication);
+		if (user.getEnabled() == false) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		} else {
 
-		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-		Set<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
-				.collect(Collectors.toSet());
+			Authentication authentication = authenticationManager
+					.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
 
-		return ResponseEntity.ok(
-				new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles));
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			String jwt = jwtUtils.generateJwtToken(authentication);
+
+			UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+			Set<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
+					.collect(Collectors.toSet());
+
+			return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),
+					userDetails.getEmail(), roles));
+		}
 	}
 
 	@PostMapping("/addAdmin")

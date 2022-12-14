@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { ActivateEmailComponent } from './activate-email/activate-email.component';
 import { BloodCenterAdminDashboardComponent } from './blood-center-admin/blood-center-admin-dashboard/blood-center-admin-dashboard.component';
 import { BloodCenterAdminProfileComponent } from './blood-center-admin/blood-center-admin-profile/blood-center-admin-profile.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -12,12 +13,15 @@ import { RegisteredClientDashboardComponent } from './registered-client/register
 import { RegisteredClientProfileComponent } from './registered-client/registered-client-profile/registered-client-profile.component';
 import { RegisteredClientQuestionnaireComponent } from './registered-client/registered-client-questionnaire/registered-client-questionnaire.component';
 import { RegisteredClientReservationsComponent } from './registered-client/registered-client-reservations/registered-client-reservations.component';
+import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { SystemAdminDashboardComponent } from './system-admin/system-admin-dashboard/system-admin-dashboard.component';
 import { SystemAdminProfileComponent } from './system-admin/system-admin-profile/system-admin-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'registration-success', component: RegistrationSuccessComponent },
+  { path: 'activate/:verificationToken', component: ActivateEmailComponent },
   { path: 'login', component: LoginComponent },
   {
     path: 'registered-client',

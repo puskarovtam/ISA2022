@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MustMatch } from '../helpers/must-match.validator';
 import { AuthService } from '../services/auth.service';
 
@@ -14,8 +15,9 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+    private route: Router
+  ) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group(
@@ -65,6 +67,7 @@ export class RegisterComponent implements OnInit {
     this.authService.register(registerDTO).subscribe(
       (data) => {
         console.log(data);
+        this.route.navigate(['/registration-success']);
       },
       (err) => {
         console.log(err);

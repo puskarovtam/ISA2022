@@ -1,5 +1,6 @@
 package com.isa.transfuzija.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import com.isa.transfuzija.dto.RegisterDTO;
@@ -15,7 +16,7 @@ public interface UserService {
 
 	List<User> findAll();
 
-	User save(RegisterDTO userDTO);
+	User save(RegisterDTO userDTO) throws UnsupportedEncodingException;
 
 	User addAdmin(SystemAdministrator admin);
 
