@@ -2,7 +2,6 @@ package com.isa.transfuzija.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,7 +14,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,10 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.transfuzija.dto.LoginDTO;
 import com.isa.transfuzija.dto.RegisterDTO;
+import com.isa.transfuzija.dto.UserDTO;
 import com.isa.transfuzija.model.BloodCenterAdministrator;
 import com.isa.transfuzija.model.SystemAdministrator;
 import com.isa.transfuzija.model.User;
-import com.isa.transfuzija.repository.RoleRepository;
 import com.isa.transfuzija.repository.UserRepository;
 import com.isa.transfuzija.response.JwtResponse;
 import com.isa.transfuzija.response.MessageResponse;
@@ -43,13 +41,9 @@ public class AuthenticationController {
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
-	private RoleRepository roleRepository;
-	@Autowired
 	private UserService userService;
 	@Autowired
 	private AuthenticationManager authenticationManager;
-	@Autowired
-	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private JwtUtils jwtUtils;
 
@@ -59,8 +53,8 @@ public class AuthenticationController {
 	}
 
 	@GetMapping("/{id}")
-	public Optional<User> findUser(@PathVariable Long id) {
-		return userRepository.findById(id);
+	public UserDTO findUser(@PathVariable Long id) {
+		return userService.findById(id);
 	}
 
 	@GetMapping("/activate/{verificationToken}")
@@ -77,7 +71,8 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterDTO registerDTO) throws UnsupportedEncodingException {
+	public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterDTO registerDTO)
+			throws UnsupportedEncodingException {
 		if (userRepository.existsByEmail(registerDTO.getEmail())) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
 		}

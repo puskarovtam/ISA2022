@@ -65,6 +65,8 @@ public class WebSecurityConfig {
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests().antMatchers("/api/auth/**").permitAll()
 			.antMatchers("/api/blood-transfusion-centers/**").permitAll()
+			.antMatchers("/api/blood-center-appointments/**").permitAll()
+			.antMatchers("/api/center-admins/**").permitAll()
 			.anyRequest().authenticated();
 		return http.build();
 	}

@@ -1,5 +1,7 @@
 package com.isa.transfuzija.dto;
 
+import com.isa.transfuzija.model.BloodTransfusionCenter;
+
 public class BloodTransfusionCenterDTO {
 
 	private Long id;
@@ -11,6 +13,16 @@ public class BloodTransfusionCenterDTO {
 	private Double rating = 0.0;
 
 	public BloodTransfusionCenterDTO() {
+	}
+
+	public BloodTransfusionCenterDTO(BloodTransfusionCenter center) {
+		this.id = center.getId();
+		this.name = center.getName();
+		this.address = center.getAddress();
+		this.city = center.getCity();
+		this.country = center.getCountry();
+		this.description = center.getDescription();
+		this.rating = center.getRating();
 	}
 
 	public Long getId() {

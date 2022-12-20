@@ -1,5 +1,6 @@
 package com.isa.transfuzija.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,14 @@ public class BloodTransfusionCenterServiceImpl implements BloodTransfusionCenter
 	private BloodTransfusionCenterRepository bloodTransfusionCenterRepository;
 
 	@Override
-	public List<BloodTransfusionCenter> findAll() {
-		return bloodTransfusionCenterRepository.findAll();
+	public List<BloodTransfusionCenterDTO> findAll() {
+		List<BloodTransfusionCenterDTO> centersDTO = new ArrayList<>();
+		List<BloodTransfusionCenter> centers = bloodTransfusionCenterRepository.findAll();
+
+		for (BloodTransfusionCenter c : centers) {
+			centersDTO.add(new BloodTransfusionCenterDTO(c));
+		}
+		return centersDTO;
 	}
 
 	@Override

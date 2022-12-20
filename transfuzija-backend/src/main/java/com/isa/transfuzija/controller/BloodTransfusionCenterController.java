@@ -26,8 +26,8 @@ public class BloodTransfusionCenterController {
 	private BloodTransfusionCenterService bloodTransfusionCenterService;
 
 	@GetMapping
-	public ResponseEntity<List<BloodTransfusionCenter>> getCenters() {
-		return new ResponseEntity<List<BloodTransfusionCenter>>(bloodTransfusionCenterService.findAll(), HttpStatus.OK);
+	public ResponseEntity<List<BloodTransfusionCenterDTO>> getCenters() {
+		return new ResponseEntity<List<BloodTransfusionCenterDTO>>(bloodTransfusionCenterService.findAll(), HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")

@@ -4,17 +4,18 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import com.isa.transfuzija.dto.RegisterDTO;
+import com.isa.transfuzija.dto.UserDTO;
 import com.isa.transfuzija.model.BloodCenterAdministrator;
 import com.isa.transfuzija.model.SystemAdministrator;
 import com.isa.transfuzija.model.User;
 
 public interface UserService {
 
-	User findById(Long id);
+	UserDTO findById(Long id);
 
-	User findByEmail(String email);
+	UserDTO findByEmail(String email);
 
-	List<User> findAll();
+	List<UserDTO> findAll();
 
 	User save(RegisterDTO userDTO) throws UnsupportedEncodingException;
 

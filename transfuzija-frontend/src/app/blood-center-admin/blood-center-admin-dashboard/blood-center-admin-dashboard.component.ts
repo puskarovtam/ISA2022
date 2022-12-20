@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { BloodCenterAdminService } from 'src/app/services/blood-center-admin.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
@@ -12,14 +14,21 @@ export class BloodCenterAdminDashboardComponent implements OnInit {
   user: any;
 
   constructor(
-    private authService: AuthService,
-    private tokenStorage: TokenStorageService
-  ) {}
+    private tokenStorage: TokenStorageService,
+    private adminService: BloodCenterAdminService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.tokenUser = this.tokenStorage.getUser();
-    this.authService.find(this.tokenUser.id).subscribe((data) => {
+    this.adminService.findByAdminId(this.tokenUser.id).subscribe((data) => {
       this.user = data;
+      console.table(this.user);
     });
+  }
+
+  logOut() {
+    this.tokenStorage.logOut();
+    this.router.navigate(['/login']);
   }
 }

@@ -23,6 +23,8 @@ import { SystemAdminProfileComponent } from './system-admin/system-admin-profile
 import { FilterPipe } from './helpers/filter.pipe';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { ActivateEmailComponent } from './activate-email/activate-email.component';
+import { BloodCenterAppointmentListComponent } from './blood-center-admin/blood-center-appointment-list/blood-center-appointment-list.component';
+import { BloodCenterAppointmentAddComponent } from './blood-center-admin/blood-center-appointment-add/blood-center-appointment-add.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { ActivateEmailComponent } from './activate-email/activate-email.componen
     FilterPipe,
     RegistrationSuccessComponent,
     ActivateEmailComponent,
+    BloodCenterAppointmentListComponent,
+    BloodCenterAppointmentAddComponent,
   ],
   imports: [
     BrowserModule,

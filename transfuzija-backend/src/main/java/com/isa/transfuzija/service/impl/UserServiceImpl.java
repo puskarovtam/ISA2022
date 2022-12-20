@@ -1,6 +1,7 @@
 package com.isa.transfuzija.service.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.isa.transfuzija.dto.RegisterDTO;
+import com.isa.transfuzija.dto.UserDTO;
 import com.isa.transfuzija.enums.RoleName;
 import com.isa.transfuzija.model.BloodCenterAdministrator;
 import com.isa.transfuzija.model.RegisteredClient;
@@ -44,18 +46,28 @@ public class UserServiceImpl implements UserService {
 	private EmailService emailService;
 
 	@Override
-	public User findById(Long id) {
-		return userRepository.findById(id).orElseGet(null);
+	public UserDTO findById(Long id) {
+		User user = userRepository.findById(id).orElseGet(null);
+		UserDTO userDTO = new UserDTO(user);
+		return userDTO;
 	}
 
 	@Override
-	public User findByEmail(String email) {
-		return userRepository.findByEmail(email).orElseGet(null);
+	public UserDTO findByEmail(String email) {
+		User user = userRepository.findByEmail(email).orElseGet(null);
+		UserDTO userDTO = new UserDTO(user);
+		return userDTO;
 	}
 
 	@Override
-	public List<User> findAll() {
-		return userRepository.findAll();
+	public List<UserDTO> findAll() {
+		List<UserDTO> usersDTO = new ArrayList<>();
+		List<User> users = userRepository.findAll();
+
+		for (User u : users) {
+			usersDTO.add(new UserDTO(u));
+		}
+		return usersDTO;
 	}
 
 	@Override
@@ -80,7 +92,7 @@ public class UserServiceImpl implements UserService {
 		rc.setPenalties(0);
 		String randomCode = RandomString.make(64);
 		rc.setVerificationToken(randomCode);
-		
+
 		emailService.sendRegistrationEmail(rc);
 
 		return registeredClientRepository.save(rc);
@@ -118,7 +130,7 @@ public class UserServiceImpl implements UserService {
 		Set<Role> roles = roleService.findByName(RoleName.CENTER_ADMINISTRATOR);
 		bca.setRoles(roles);
 		bca.setEnabled(true);
-		
+
 		return bloodCenterAdministratorRepository.save(bca);
 	}
 

@@ -2,10 +2,12 @@ package com.isa.transfuzija.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,9 +15,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "blood_transfusion_centers")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class BloodTransfusionCenter {
 
 	@Id
@@ -35,8 +40,12 @@ public class BloodTransfusionCenter {
 	@Column(name = "transfusion_rating")
 	private Double rating = 0.0;
 	@JsonIgnore
-	@OneToMany(mappedBy = "transfusionCenter", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "transfusionCenter", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<BloodCenterAdministrator> bloodCenterAdministrators = new ArrayList<>();
+	@JsonIgnore
+	@OneToMany(mappedBy = "center", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private Set<BloodCenterAppointment> bloodCenterAppointments;
 
 	public BloodTransfusionCenter() {
 	}
@@ -103,6 +112,14 @@ public class BloodTransfusionCenter {
 
 	public void setBloodCenterAdministrators(List<BloodCenterAdministrator> bloodCenterAdministrators) {
 		this.bloodCenterAdministrators = bloodCenterAdministrators;
+	}
+
+	public Set<BloodCenterAppointment> getBloodCenterAppointments() {
+		return bloodCenterAppointments;
+	}
+
+	public void setBloodCenterAppointments(Set<BloodCenterAppointment> bloodCenterAppointments) {
+		this.bloodCenterAppointments = bloodCenterAppointments;
 	}
 
 }

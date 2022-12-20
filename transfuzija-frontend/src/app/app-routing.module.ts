@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ActivateEmailComponent } from './activate-email/activate-email.component';
 import { BloodCenterAdminDashboardComponent } from './blood-center-admin/blood-center-admin-dashboard/blood-center-admin-dashboard.component';
 import { BloodCenterAdminProfileComponent } from './blood-center-admin/blood-center-admin-profile/blood-center-admin-profile.component';
+import { BloodCenterAppointmentAddComponent } from './blood-center-admin/blood-center-appointment-add/blood-center-appointment-add.component';
+import { BloodCenterAppointmentListComponent } from './blood-center-admin/blood-center-appointment-list/blood-center-appointment-list.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -51,6 +53,14 @@ const routes: Routes = [
     component: BloodCenterAdminDashboardComponent,
     children: [
       {
+        path: 'available-appointments',
+        component: BloodCenterAppointmentListComponent,
+      },
+      {
+        path: 'new-appointment',
+        component: BloodCenterAppointmentAddComponent,
+      },
+      {
         path: 'profile',
         component: BloodCenterAdminProfileComponent,
       },
@@ -62,4 +72,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

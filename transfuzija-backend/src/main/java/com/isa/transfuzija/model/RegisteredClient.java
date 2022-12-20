@@ -1,8 +1,13 @@
 package com.isa.transfuzija.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "registered_clients")
@@ -20,6 +25,9 @@ public class RegisteredClient extends User {
 	private Boolean blocked = false;
 	@Column(name = "registered_penalties")
 	private Integer penalties = 0;
+	@OneToMany(mappedBy = "client")
+	@JsonManagedReference
+	private Set<BloodCenterAppointment> bloodCenterAppointments;
 
 	public String getJmbg() {
 		return jmbg;
@@ -67,6 +75,14 @@ public class RegisteredClient extends User {
 
 	public void setPenalties(Integer penalties) {
 		this.penalties = penalties;
+	}
+
+	public Set<BloodCenterAppointment> getBloodCenterAppointments() {
+		return bloodCenterAppointments;
+	}
+
+	public void setBloodCenterAppointments(Set<BloodCenterAppointment> bloodCenterAppointments) {
+		this.bloodCenterAppointments = bloodCenterAppointments;
 	}
 
 }

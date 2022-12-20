@@ -1,0 +1,4 @@
+.full-screen,
+.full-screen>* {
+    min-height: 100vh;
+}

@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   find(id: any) {
-    return this.http.get(`${AUTH_API} + ${id}`);
+    return this.http.get(`${AUTH_API}` + `${id}`);
   }
 
   /* Verifikovanje email-a - Aktivacija */

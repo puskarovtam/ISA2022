@@ -7,7 +7,7 @@ import com.isa.transfuzija.model.BloodTransfusionCenter;
 
 public interface BloodTransfusionCenterService {
 
-	List<BloodTransfusionCenter> findAll();
+	List<BloodTransfusionCenterDTO> findAll();
 
 	BloodTransfusionCenter findById(Long id);
 

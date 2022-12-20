@@ -1,0 +1,31 @@
+<div class="container mt-3">
+    <form [formGroup]="appointmentForm">
+        <div class="row">
+            <div class="col-sm-4">
+                <input type="datetime-local" class="form-control" formControlName="appointmentStart" name="appointmentStart" id="appointmentStart">
+            </div>
+            <div class="col-sm-4">
+                <select class="form-control" formControlName="duration" name="duration" id="duration">
+                    <option value="10">10 minuta</option>
+                    <option value="20">20 minuta</option>
+                    <option value="30">30 minuta</option>
+                    <option value="40">40 minuta</option>
+                    <option value="50">50 minuta</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <select class="form-control" formControlName="stuff" name="stuff" id="stuff">
+                    <option *ngFor="let stuff of medicalStuff" [value]="stuff.id">{{stuff.name}} {{stuff.surname}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <button class="btn btn-success" (click)="submit()">Dodaj</button>
+        </div>
+    </form>
+</div>
+
+<hr>
+<p>{{loggedInAdmin.name}} {{loggedInAdmin.surname}}</p>
+<hr>
+<p>Centar je: </p> <p>{{center.name}}</p>
