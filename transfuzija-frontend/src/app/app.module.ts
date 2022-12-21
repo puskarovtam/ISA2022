@@ -27,6 +27,7 @@ import { RegisteredClientReservationsComponent } from './registered-client/regis
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { SystemAdminDashboardComponent } from './system-admin/system-admin-dashboard/system-admin-dashboard.component';
 import { SystemAdminProfileComponent } from './system-admin/system-admin-profile/system-admin-profile.component';
+import { RegisteredClientAppointmentsComponent } from './registered-client/registered-client-appointments/registered-client-appointments.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { SystemAdminProfileComponent } from './system-admin/system-admin-profile
     BloodCenterAppointmentListComponent,
     BloodCenterAppointmentAddComponent,
     RegisteredClientCenterPageComponent,
+    RegisteredClientAppointmentsComponent,
   ],
   imports: [
     BrowserModule,
