@@ -1,0 +1,29 @@
+<div class="container" style="padding-top: 150px;">
+    <div class="row">
+
+        <div class="col-md-8">
+            <h1 class="my-4 mb-3">{{bloodCenter.name}}</h1>
+            <img class="img-fluid" src="https://via.placeholder.com/750x500" alt="">
+        </div>
+
+        <div class="col-md-4">
+            <!-- <h1 class="my-4">{{bloodCenter.name}}</h1> -->
+            <h3 class="my-4 mt-5"><small><i class="fa-solid fa-location-dot me-2"></i>{{bloodCenter.address}},
+                    {{bloodCenter.city}},
+                    {{bloodCenter.country}}</small></h3>
+            <hr>
+            <h3 class="my-3">O nama</h3>
+            <p>{{bloodCenter.description}}</p>
+            <p>
+                <ng-template #t let-fill="fill">
+                    <i id="rate" class="fa-solid fa-star">
+                        <i *ngIf="fill > 0" class="fa-solid fa-star filled" [style.width.%]="fill"></i>
+                    </i>
+                </ng-template>
+                
+                <ngb-rating [rate]="bloodCenter.rating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+            </p>
+            <button class="btn btn-primary" (click)="scheduleAppointment(bloodCenter.id)">Zakazite termin</button>
+        </div>
+    </div>
+</div>

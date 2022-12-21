@@ -9,7 +9,7 @@ public interface BloodTransfusionCenterService {
 
 	List<BloodTransfusionCenterDTO> findAll();
 
-	BloodTransfusionCenter findById(Long id);
+	BloodTransfusionCenterDTO findById(Long id);
 
 	BloodTransfusionCenter save(BloodTransfusionCenterDTO centerDTO);
 

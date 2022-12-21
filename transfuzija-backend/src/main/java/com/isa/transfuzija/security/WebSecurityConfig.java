@@ -67,6 +67,7 @@ public class WebSecurityConfig {
 			.antMatchers("/api/blood-transfusion-centers/**").permitAll()
 			.antMatchers("/api/blood-center-appointments/**").permitAll()
 			.antMatchers("/api/center-admins/**").permitAll()
+			.antMatchers("/api/clients/**").permitAll()
 			.anyRequest().authenticated();
 		return http.build();
 	}

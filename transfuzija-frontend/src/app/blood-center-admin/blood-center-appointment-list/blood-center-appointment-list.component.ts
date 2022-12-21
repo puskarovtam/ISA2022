@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
 import { BloodCenterAdminService } from 'src/app/services/blood-center-admin.service';
 import { BloodCenterAppointmentService } from 'src/app/services/blood-center-appointment.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';

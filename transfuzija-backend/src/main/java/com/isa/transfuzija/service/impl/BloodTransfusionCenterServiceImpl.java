@@ -29,8 +29,10 @@ public class BloodTransfusionCenterServiceImpl implements BloodTransfusionCenter
 	}
 
 	@Override
-	public BloodTransfusionCenter findById(Long id) {
-		return bloodTransfusionCenterRepository.findById(id).orElseGet(null);
+	public BloodTransfusionCenterDTO findById(Long id) {
+		BloodTransfusionCenter center = bloodTransfusionCenterRepository.findById(id).orElseGet(null);
+		BloodTransfusionCenterDTO centerDTO = new BloodTransfusionCenterDTO(center);
+		return centerDTO;
 	}
 
 	@Override

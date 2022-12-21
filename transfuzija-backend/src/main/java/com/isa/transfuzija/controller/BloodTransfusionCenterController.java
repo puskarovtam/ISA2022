@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.transfuzija.dto.BloodTransfusionCenterDTO;
-import com.isa.transfuzija.model.BloodTransfusionCenter;
 import com.isa.transfuzija.response.MessageResponse;
 import com.isa.transfuzija.service.BloodTransfusionCenterService;
 
@@ -27,12 +26,13 @@ public class BloodTransfusionCenterController {
 
 	@GetMapping
 	public ResponseEntity<List<BloodTransfusionCenterDTO>> getCenters() {
-		return new ResponseEntity<List<BloodTransfusionCenterDTO>>(bloodTransfusionCenterService.findAll(), HttpStatus.OK);
+		return new ResponseEntity<List<BloodTransfusionCenterDTO>>(bloodTransfusionCenterService.findAll(),
+				HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getCenter(@PathVariable Long id) {
-		return new ResponseEntity<BloodTransfusionCenter>(bloodTransfusionCenterService.findById(id), HttpStatus.OK);
+		return new ResponseEntity<BloodTransfusionCenterDTO>(bloodTransfusionCenterService.findById(id), HttpStatus.OK);
 	}
 
 	@PostMapping

@@ -8,6 +8,7 @@ import { BloodCenterAppointmentListComponent } from './blood-center-admin/blood-
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { RegisteredClientCenterPageComponent } from './registered-client/registered-client-center-page/registered-client-center-page.component';
 import { RegisteredClientCentersHistoryComponent } from './registered-client/registered-client-centers-history/registered-client-centers-history.component';
 import { RegisteredClientCentersComponent } from './registered-client/registered-client-centers/registered-client-centers.component';
 import { RegisteredClientComplainsComponent } from './registered-client/registered-client-complains/registered-client-complains.component';
@@ -30,6 +31,7 @@ const routes: Routes = [
     component: RegisteredClientDashboardComponent,
     children: [
       { path: 'centers', component: RegisteredClientCentersComponent },
+      { path: 'center/:id', component: RegisteredClientCenterPageComponent },
       { path: 'history', component: RegisteredClientCentersHistoryComponent },
       {
         path: 'reservations',

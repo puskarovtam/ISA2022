@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { RegisteredClientService } from 'src/app/services/registered-client.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
@@ -11,13 +11,13 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 export class RegisteredClientDashboardComponent implements OnInit {
   user: any;
 
-  constructor(private authService: AuthService,
+  constructor(private clientService: RegisteredClientService,
     private tokenStorage: TokenStorageService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.authService.find(this.tokenStorage.getUser().id).subscribe((data) => {
+    this.clientService.findClientById(this.tokenStorage.getUser().id).subscribe((data) => {
       this.user = data;
     });
   }
