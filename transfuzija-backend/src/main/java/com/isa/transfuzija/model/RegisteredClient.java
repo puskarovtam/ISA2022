@@ -4,7 +4,9 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -25,6 +27,9 @@ public class RegisteredClient extends User {
 	private Boolean blocked = false;
 	@Column(name = "registered_penalties")
 	private Integer penalties = 0;
+	@OneToOne
+	@JoinColumn(name = "questionnaire_id", referencedColumnName = "id")
+	private Questionnaire questionnaire;
 	@OneToMany(mappedBy = "client")
 	@JsonManagedReference
 	private Set<BloodCenterAppointment> bloodCenterAppointments;
@@ -75,6 +80,14 @@ public class RegisteredClient extends User {
 
 	public void setPenalties(Integer penalties) {
 		this.penalties = penalties;
+	}
+
+	public Questionnaire getQuestionnaire() {
+		return questionnaire;
+	}
+
+	public void setQuestionnaire(Questionnaire questionnaire) {
+		this.questionnaire = questionnaire;
 	}
 
 	public Set<BloodCenterAppointment> getBloodCenterAppointments() {
