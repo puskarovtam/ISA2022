@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.isa.transfuzija.dto.BloodCenterAppointmentCreateDTO;
 import com.isa.transfuzija.dto.BloodCenterAppointmentDTO;
-import com.isa.transfuzija.model.BloodCenterAppointment;
 import com.isa.transfuzija.service.BloodCenterAppointmentService;
 
 @RestController
@@ -34,10 +33,10 @@ public class BloodCenterAppointmentController {
 	}
 
 	@PostMapping
-	public ResponseEntity<BloodCenterAppointment> createAppointment(
+	public ResponseEntity<?> createAppointment(
 			@RequestBody BloodCenterAppointmentCreateDTO appointmentDTO) {
-		BloodCenterAppointment appointment = bloodCenterAppointmentService.save(appointmentDTO);
-		return new ResponseEntity<BloodCenterAppointment>(appointment, HttpStatus.OK);
+		bloodCenterAppointmentService.save(appointmentDTO);
+		return new ResponseEntity<>(appointmentDTO, HttpStatus.OK);
 	}
 	
 	@PutMapping("/book/{clientId}/{appointmentId}")

@@ -12,10 +12,12 @@ import { BloodCenterAdminProfileComponent } from './blood-center-admin/blood-cen
 import { BloodCenterAppointmentAddComponent } from './blood-center-admin/blood-center-appointment-add/blood-center-appointment-add.component';
 import { BloodCenterAppointmentListComponent } from './blood-center-admin/blood-center-appointment-list/blood-center-appointment-list.component';
 import { FilterPipe } from './helpers/filter.pipe';
+import { SortByPipe } from './helpers/sort-by.pipe';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
+import { RegisteredClientAppointmentsComponent } from './registered-client/registered-client-appointments/registered-client-appointments.component';
 import { RegisteredClientCenterPageComponent } from './registered-client/registered-client-center-page/registered-client-center-page.component';
 import { RegisteredClientCentersHistoryComponent } from './registered-client/registered-client-centers-history/registered-client-centers-history.component';
 import { RegisteredClientCentersComponent } from './registered-client/registered-client-centers/registered-client-centers.component';
@@ -27,7 +29,6 @@ import { RegisteredClientReservationsComponent } from './registered-client/regis
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { SystemAdminDashboardComponent } from './system-admin/system-admin-dashboard/system-admin-dashboard.component';
 import { SystemAdminProfileComponent } from './system-admin/system-admin-profile/system-admin-profile.component';
-import { RegisteredClientAppointmentsComponent } from './registered-client/registered-client-appointments/registered-client-appointments.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { RegisteredClientAppointmentsComponent } from './registered-client/regis
     BloodCenterAppointmentAddComponent,
     RegisteredClientCenterPageComponent,
     RegisteredClientAppointmentsComponent,
+    SortByPipe,
   ],
   imports: [
     BrowserModule,

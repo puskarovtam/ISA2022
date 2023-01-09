@@ -9,6 +9,7 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 })
 export class RegisteredClientCentersHistoryComponent implements OnInit {
   appointments: any;
+  sort: string = 'NO_SORT';
 
   constructor(private tokenStorage: TokenStorageService,
     private clientService: RegisteredClientService

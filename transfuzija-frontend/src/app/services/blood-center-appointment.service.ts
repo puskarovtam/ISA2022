@@ -18,4 +18,8 @@ export class BloodCenterAppointmentService {
   createAppointment(appointment: any) {
     return this.http.post(`${CENTER_APPOINTMENTS_API}`, appointment);
   }
+
+  bookAppointment(clientId: any, appointmentId: any) {
+    return this.http.put<any>(`${CENTER_APPOINTMENTS_API}` + `book/${clientId}/${appointmentId}`, null);
+  }
 }
