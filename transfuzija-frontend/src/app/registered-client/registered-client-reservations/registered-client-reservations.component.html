@@ -1,1 +1,37 @@
-<p>registered-client-reservations works!</p>
+<div class="container mt-5">
+    <div class="row mt-3">
+        <div class="col-lg-4" *ngFor="let appointment of appointments">
+            <div class="card card-margin">
+                <div class="card-header no-border">
+                    <h5 class="card-title"></h5>
+                </div>
+                <div class="card-body pt-0">
+                    <div class="widget-49">
+                        <div class="widget-49-title-wrapper">
+                            <div class="widget-49-date-success">
+                                <span class="widget-49-date-day">{{appointment.appointmentStart| date: 'dd'}}</span>
+                                <span class="widget-49-date-month">{{appointment.appointmentStart | date: 'MM'}}</span>
+                            </div>
+                            <div class="widget-49-meeting-info">
+                                <span class="widget-49-pro-title">Datum termina: {{appointment.appointmentStart |
+                                    date: 'dd.MM.yyyy'}}</span>
+                                <span class="widget-49-meeting-time">Vreme termina: {{appointment.appointmentStart |
+                                    date: 'hh:mm'}}h</span>
+                            </div>
+                        </div>
+                        <ol class="widget-49-meeting-points">
+                            <li class="widget-49-meeting-item"><span>Trajanje termina: {{appointment.duration}}
+                                    minuta.</span></li>
+                            <li class="widget-49-meeting-item"><span>Medicinsko osoblje: {{appointment.stuff.name}}
+                                    {{appointment.stuff.surname}}</span></li>
+                        </ol>
+                        <div class="widget-49-meeting-action">
+                            <a href="#" class="btn btn-sm btn-flash-border-primary">Izmeni</a>
+                            <a href="#" class="btn btn-sm btn-flash-border-primary">Obriši</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

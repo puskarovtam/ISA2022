@@ -18,4 +18,20 @@ export class RegisteredClientService {
   findClientById(id: any) {
     return this.http.get(`${REGISTERED_CLIENTS_API}` + `${id}`);
   }
+
+  editClient(client: any) {
+    return this.http.put(`${REGISTERED_CLIENTS_API}`, client);
+  }
+
+  saveQuestionnaire(id: any, questionnaire: any){
+    return this.http.post(`${REGISTERED_CLIENTS_API}` + `${id}/questionnaire`, questionnaire);
+  }
+
+  findUpcomingAppointments(id: any){
+    return this.http.get(`${REGISTERED_CLIENTS_API}` + `${id}/upcoming-appointments`);
+  }
+
+  findPastAppointments(id: any){
+    return this.http.get(`${REGISTERED_CLIENTS_API}` + `${id}/past-appointments`);
+  }
 }

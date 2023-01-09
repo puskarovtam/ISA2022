@@ -20,7 +20,6 @@ export class BloodCenterAppointmentAddComponent implements OnInit {
   appointmentForm!: FormGroup;
 
   constructor(private tokenStorage: TokenStorageService,
-    private authService: AuthService,
     private centerService: BloodCenterService,
     private adminService: BloodCenterAdminService,
     private appointmentService: BloodCenterAppointmentService,
@@ -35,9 +34,9 @@ export class BloodCenterAppointmentAddComponent implements OnInit {
   }
 
   loadData() {
-    this.authService.find(this.tokenStorage.getUser().id).subscribe((data) => {
+    this.adminService.findByAdminId(this.tokenStorage.getUser().id).subscribe((data) => {
       this.loggedInAdmin = data;
-      this.centerService.findOne(this.loggedInAdmin.transfusionCenter.id).subscribe((data) => {
+      this.centerService.findOne(this.loggedInAdmin.transfusionCenterId).subscribe((data) => {
         this.center = data;
         this.adminService.findAllAdmins(this.center.id).subscribe((data) => {
           this.medicalStuff = data;

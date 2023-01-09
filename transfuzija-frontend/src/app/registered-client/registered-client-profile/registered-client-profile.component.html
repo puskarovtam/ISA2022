@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="container my-5 text-end">
         <button class="btn btn-primary mx-2" *ngIf="change" (click)="enableChanges()">Izmeni podatke</button>
-        <button class="btn btn-primary mx-2" *ngIf="change">Izmeni password</button>
+        <button class="btn btn-primary mx-2" *ngIf="change" (click)="passwordChange()">Izmeni password</button>
     </div>
     <div class="row text-center">
         <div class="card">
@@ -9,7 +9,7 @@
                 <h5 class="card-title">Profil korisnika: {{client.name}} {{client.surname}}</h5>
             </div>
             <div class="card-body">
-                <form [formGroup]="clientProfileForm">
+                <form [formGroup]="clientProfileForm" (ngSubmit)="saveChanges()">
                     <fieldset [disabled]="change">
                         <fieldset [disabled]="true">
                             <div class="form-floating mb-3">
@@ -17,12 +17,10 @@
                                     [ngClass]="{'is-invalid': submitted && clientProfileForm.controls.email.errors }"
                                     class="form-control" formControlName="email" placeholder="name@example.com">
                                 <label for="email">Email adresa</label>
-                                <div *ngIf="submitted && clientProfileForm.controls.email.errors"
-                                    class="invalid-feedback">
+                                <div *ngIf="submitted && clientProfileForm.controls.email.errors" class="invalid-feedback">
                                     <div *ngIf="clientProfileForm.controls.email.errors.required">Email je obavezan.
                                     </div>
-                                    <div *ngIf="clientProfileForm.controls.email.errors.email">Email mora da bude
-                                        validna
+                                    <div *ngIf="clientProfileForm.controls.email.errors.email">Email mora da bude validna
                                         email adresa.</div>
                                 </div>
                             </div>
@@ -165,8 +163,7 @@
 
                         <div style="float: right;">
                             <button class="btn btn-primary mb-2 mx-2" type="submit" *ngIf="!change">Izmeni</button>
-                            <button class="btn btn-secondary mb-2 mx-2" *ngIf="!change"
-                                (click)="cancelChanges()">Odustani</button>
+                            <button class="btn btn-secondary mb-2 mx-2" *ngIf="!change" (click)="cancelChanges()">Odustani</button>
                         </div>
                     </fieldset>
                 </form>

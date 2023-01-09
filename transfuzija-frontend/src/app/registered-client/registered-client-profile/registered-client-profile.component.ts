@@ -49,9 +49,38 @@ export class RegisteredClientProfileComponent implements OnInit {
     this.change = !this.change;
   }
 
+  passwordChange() {
+    this.router.navigate(['../password-change']);
+  }
+
   cancelChanges() {
     this.change = !this.change;
     this.clientInfo();
+  }
+
+  saveChanges() {
+    this.submitted = true;
+    if (this.clientProfileForm.invalid) {
+      return;
+    }
+
+    var client = {
+      id: this.client.id,
+      email: this.clientProfileForm.controls.email.value,
+      name: this.clientProfileForm.controls.name.value,
+      surname: this.clientProfileForm.controls.surname.value,
+      address: this.clientProfileForm.controls.address.value,
+      city: this.clientProfileForm.controls.city.value,
+      country: this.clientProfileForm.controls.country.value,
+      phoneNumber: this.clientProfileForm.controls.phoneNumber.value,
+      jmbg: this.clientProfileForm.controls.jmbg.value,
+      gender: this.clientProfileForm.controls.gender.value,
+      occupation: this.clientProfileForm.controls.occupation.value
+    }
+
+    this.clientService.editClient(client).subscribe((data) => {
+      this.change = !this.change;
+    });
   }
 
 }
