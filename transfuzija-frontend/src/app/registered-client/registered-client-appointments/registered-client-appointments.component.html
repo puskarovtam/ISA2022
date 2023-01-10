@@ -2,8 +2,27 @@
     <div class="row mt-3">
         <h5>Dostupni termini u {{appointments[0].center.name}}</h5>
     </div>
+
+    <div class="row mt-3 mb-5">
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-3" style="text-align: right;">
+            <select class="form-select form-select-sm" [(ngModel)]="sort">
+                <option value="NO_SORT">Sortirajte po...</option>
+                <option value="DATE_DES">Datum termina - opdajuće</option>
+                <option value="DATE_ASC">Datum termina - rastuće</option>
+                <option value="DURATION_DES">Trajanje termina - opadujuće</option>
+                <option value="DURATION_ASC">Trajanje termina - rastuće</option>
+            </select>
+        </div>
+    </div>
+
     <div class="row mt-3">
-        <div class="col-lg-4" *ngFor="let appointment of appointments">
+        <div class="col-lg-4" *ngFor="let appointment of appointments | sortBy: sort">
             <div class="card card-margin">
                 <div class="card-header no-border">
                     <h5 class="card-title"></h5>
@@ -29,7 +48,8 @@
                                     {{appointment.stuff.surname}}</span></li>
                         </ol>
                         <div class="widget-49-meeting-action">
-                            <button class="btn btn-sm btn-flash-border-primary" (click)="bookAppointment(appointment.id)">Zakaži termin</button>
+                            <button class="btn btn-sm btn-flash-border-primary"
+                                (click)="bookAppointment(appointment.id)">Zakaži termin</button>
                         </div>
                     </div>
                 </div>

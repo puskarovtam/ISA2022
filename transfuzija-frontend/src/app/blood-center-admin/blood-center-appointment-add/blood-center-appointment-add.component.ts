@@ -67,4 +67,8 @@ export class BloodCenterAppointmentAddComponent implements OnInit {
     })
   }
 
+  cancel() {
+    this.router.navigate(['../available-appointments'], { relativeTo: this.route });
+  }
+
 }

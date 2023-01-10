@@ -1,31 +1,45 @@
-<div class="container mt-3">
-    <form [formGroup]="appointmentForm">
-        <div class="row">
-            <div class="col-sm-4">
-                <input type="datetime-local" class="form-control" formControlName="appointmentStart" name="appointmentStart" id="appointmentStart">
-            </div>
-            <div class="col-sm-4">
-                <select class="form-control" formControlName="duration" name="duration" id="duration">
-                    <option value="10">10 minuta</option>
-                    <option value="20">20 minuta</option>
-                    <option value="30">30 minuta</option>
-                    <option value="40">40 minuta</option>
-                    <option value="50">50 minuta</option>
-                </select>
-            </div>
-            <div class="col-sm-4">
-                <select class="form-control" formControlName="stuff" name="stuff" id="stuff">
-                    <option *ngFor="let stuff of medicalStuff" [value]="stuff.id">{{stuff.name}} {{stuff.surname}}</option>
-                </select>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Novi termin za rezervaciju</h5>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="appointmentForm">
+                        <div class="form-floating mb-3">
+                            <input type="datetime-local" class="form-control" formControlName="appointmentStart"
+                                name="appointmentStart" id="appointmentStart">
+                            <label for="appointmentStart">Datum i vreme održavanja termina</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-control" formControlName="duration" name="duration" id="duration">
+                                <option value="10">10 minuta</option>
+                                <option value="20">20 minuta</option>
+                                <option value="30">30 minuta</option>
+                                <option value="40">40 minuta</option>
+                                <option value="50">50 minuta</option>
+                            </select>
+                            <label for="duration">Trajanje termina</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-control" formControlName="stuff" name="stuff" id="stuff">
+                                <option *ngFor="let stuff of medicalStuff" [value]="stuff.id">{{stuff.name}}
+                                    {{stuff.surname}}</option>
+                            </select>
+                            <label for="stuff">Medicinsko osoblje</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-end">
+                    <button class="btn btn-primary mb-2 mx-2" (click)="submit()">Dodaj</button>
+                    <button class="btn btn-secondary mb-2 mx-2" (click)="cancel()">Odustani</button>
+                </div>
             </div>
         </div>
-        <div class="row mt-3">
-            <button class="btn btn-success" (click)="submit()">Dodaj</button>
+        <div class="col-sm-4">
         </div>
-    </form>
+    </div>
 </div>
-
-<hr>
-<p>{{loggedInAdmin.name}} {{loggedInAdmin.surname}}</p>
-<hr>
-<p>Centar je: </p> <p>{{center.name}}</p>

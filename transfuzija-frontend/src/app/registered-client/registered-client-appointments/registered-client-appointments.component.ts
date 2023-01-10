@@ -10,7 +10,8 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 })
 export class RegisteredClientAppointmentsComponent implements OnInit {
   id: number = 0;
-  appointments!: any;
+  appointments: any;
+  sort: string = 'NO_SORT';
 
   constructor(private appointmentService: BloodCenterAppointmentService,
     private tokenStorage: TokenStorageService,
