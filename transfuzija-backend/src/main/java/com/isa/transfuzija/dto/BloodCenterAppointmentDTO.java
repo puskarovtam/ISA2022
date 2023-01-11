@@ -12,6 +12,8 @@ public class BloodCenterAppointmentDTO {
 	private BloodTransfusionCenterDTO center;
 	private RegisteredClientDTO client;
 	private BloodCenterAdministratorDTO stuff;
+	private Boolean cancel;
+	private Boolean cancelledByClient;
 
 	public BloodCenterAppointmentDTO() {
 		super();
@@ -75,6 +77,22 @@ public class BloodCenterAppointmentDTO {
 
 	public void setStuff(BloodCenterAdministratorDTO stuff) {
 		this.stuff = stuff;
+	}
+
+	public Boolean getCancel() {
+		return cancel;
+	}
+
+	public void setCancel(Boolean cancel) {
+		this.cancel = cancel;
+	}
+
+	public Boolean getCancelledByClient() {
+		return cancelledByClient;
+	}
+
+	public void setCancelledByClient(Boolean cancelledByClient) {
+		this.cancelledByClient = cancelledByClient;
 	}
 
 }

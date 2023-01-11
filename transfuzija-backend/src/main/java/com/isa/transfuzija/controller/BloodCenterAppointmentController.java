@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,12 +34,11 @@ public class BloodCenterAppointmentController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> createAppointment(
-			@RequestBody BloodCenterAppointmentCreateDTO appointmentDTO) {
+	public ResponseEntity<?> createAppointment(@RequestBody BloodCenterAppointmentCreateDTO appointmentDTO) {
 		bloodCenterAppointmentService.save(appointmentDTO);
 		return new ResponseEntity<>(appointmentDTO, HttpStatus.OK);
 	}
-	
+
 	@PutMapping("/book/{clientId}/{appointmentId}")
 	public ResponseEntity<?> bookAppointment(@PathVariable Long clientId, @PathVariable Long appointmentId) {
 		if (clientId == null || appointmentId == null) {
@@ -52,6 +52,22 @@ public class BloodCenterAppointmentController {
 			return new ResponseEntity<>("This appointment has already been taken.", HttpStatus.CONFLICT);
 		}
 
+	}
+
+	@DeleteMapping("/cancel/{clientId}/{appointmentId}")
+	public ResponseEntity<?> cancelAppointment(@PathVariable Long clientId, @PathVariable Long appointmentId) {
+		if (clientId == null || appointmentId == null) {
+			return new ResponseEntity<>("Invalid id", HttpStatus.BAD_REQUEST);
+		}
+
+		BloodCenterAppointmentDTO appointmentDTO = bloodCenterAppointmentService.cancelAppointment(clientId,
+				appointmentId);
+		return new ResponseEntity<>(appointmentDTO, HttpStatus.OK);
+	}
+
+	@GetMapping("/has-cancelled/{clientId}/{appointmentId}")
+	public Boolean cancelledByClient(@PathVariable Long clientId, @PathVariable Long appointmentId) {
+		return bloodCenterAppointmentService.clientHasCancelledAppointment(clientId, appointmentId);
 	}
 
 }

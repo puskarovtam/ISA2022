@@ -54,7 +54,7 @@ public class BloodCenterAppointmentServiceImpl implements BloodCenterAppointment
 
 		List<BloodCenterAppointmentDTO> appointmentsDTO = new ArrayList<>();
 		List<BloodCenterAppointment> appointments = bloodCenterAppointmentRepository
-				.getByCenterAndClientNullAndIsDeletedFalse(center.get());
+				.getByCenterAndIsReservedFalseAndIsDeletedFalse(center.get());
 
 		for (BloodCenterAppointment a : appointments) {
 			appointmentsDTO.add(new BloodCenterAppointmentDTO(a));
@@ -84,6 +84,7 @@ public class BloodCenterAppointmentServiceImpl implements BloodCenterAppointment
 		appointment.setStuff(stuff.get());
 		appointment.setIsCompleted(false);
 		appointment.setIsCanceled(false);
+		appointment.setIsReserved(false);
 		appointment.setIsDeleted(false);
 
 		bloodCenterAppointmentRepository.save(appointment);
@@ -97,30 +98,34 @@ public class BloodCenterAppointmentServiceImpl implements BloodCenterAppointment
 			throws PessimisticLockingFailureException {
 		Optional<RegisteredClient> client = registeredClientRepository.findById(clientId);
 
-		if (!client.isPresent()) {
-			throw new ValidationException("Client with given id does not exist.");
-		}
-
 		BloodCenterAppointment appointment = bloodCenterAppointmentRepository.findOneById(appointmentId);
+
+		if (client == null) {
+			throw new ValidationException("Client with given ID does not exist.");
+		}
+
 		if (appointment == null) {
-			throw new ValidationException("Appointmnet does not exist.");
+			throw new ValidationException("Appointmnet with given ID does not exist.");
 		}
 
-		if (appointment.getClient() != null) {
-			throw new ValidationException("Appointment is already booked.");
+		if (!appointment.getIsReserved()) {
+			appointment.setClient(client.get());
+			appointment.setIsCanceled(false);
+			appointment.setIsReserved(true);
 		}
 
-		appointment.setClient(client.get());
 		BloodCenterAppointment bca = bloodCenterAppointmentRepository.save(appointment);
 		client.get().getBloodCenterAppointments().add(bca);
 		registeredClientRepository.save(client.get());
-		
+
 		String qrCodeContent = "Naziv centra za transfuziju: " + appointment.getCenter().getName() + " \n\n "
-				+ "Datum i vreme zakazanog termina: " + appointment.getAppointmentStart().format(FormatDateTime.DD_MM_YYYY.getFormatter()) + " \n\n "
-				+ "Registrovani klijent: " + appointment.getClient().getName() + " " + appointment.getClient().getSurname();
-		
+				+ "Datum i vreme zakazanog termina: "
+				+ appointment.getAppointmentStart().format(FormatDateTime.DD_MM_YYYY.getFormatter()) + " \n\n "
+				+ "Registrovani klijent: " + appointment.getClient().getName() + " "
+				+ appointment.getClient().getSurname();
+
 		byte[] qrCode = qrCodeService.generateQrCode(qrCodeContent, 500, 500);
-		
+
 		try {
 			emailService.sendAppointmentEmail(client.get(), qrCode);
 		} catch (UnsupportedEncodingException e) {
@@ -135,17 +140,35 @@ public class BloodCenterAppointmentServiceImpl implements BloodCenterAppointment
 		RegisteredClient client = registeredClientRepository.findById(clientId).get();
 		BloodCenterAppointment appointment = bloodCenterAppointmentRepository.findById(appointmentId).get();
 
-		if (appointment.getClient() == null) {
-			throw new ValidationException("Appointment has no client set");
+		if (client == null) {
+			throw new ValidationException("Client with given ID does not exist.");
 		}
 
-		appointment.setClient(null);
-		client.getBloodCenterAppointments().remove(appointment);
-		registeredClientRepository.save(client);
+		if (appointment == null) {
+			throw new ValidationException("Appointmnet with given ID does not exist.");
+		}
+
+		if (appointment != null) {
+			appointment.setIsCanceled(true);
+			appointment.setIsReserved(false);
+		}
 
 		BloodCenterAppointment bca = bloodCenterAppointmentRepository.save(appointment);
 
 		return new BloodCenterAppointmentDTO(bca);
+	}
+
+	@Override
+	public Boolean clientHasCancelledAppointment(Long clientId, Long appointmentId) {
+		RegisteredClient client = registeredClientRepository.findById(clientId).get();
+		BloodCenterAppointment appointment = bloodCenterAppointmentRepository.findById(appointmentId).get();
+
+		for (BloodCenterAppointment app : client.getBloodCenterAppointments()) {
+			if (app.equals(appointment)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

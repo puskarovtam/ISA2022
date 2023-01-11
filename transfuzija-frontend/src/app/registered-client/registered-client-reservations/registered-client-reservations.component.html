@@ -1,4 +1,7 @@
 <div class="container my-5">
+    <div class="row mt-3 mb-3">
+        <h5>Predstojeći rezervisani termina u centrima za transfuziju</h5>
+    </div>
     <div class="row">
         <div class="col-sm-3">
         </div>
@@ -46,8 +49,7 @@
                                     {{appointment.stuff.surname}}</span></li>
                         </ol>
                         <div class="widget-49-meeting-action">
-                            <a href="#" class="btn btn-sm btn-flash-border-primary">Izmeni</a>
-                            <a href="#" class="btn btn-sm btn-flash-border-primary">Obriši</a>
+                            <button [disabled]="!appointment.cancel" class="btn btn-sm btn-primary" (click)="cancelAppointment(appointment)">Otkaži termin</button>
                         </div>
                     </div>
                 </div>

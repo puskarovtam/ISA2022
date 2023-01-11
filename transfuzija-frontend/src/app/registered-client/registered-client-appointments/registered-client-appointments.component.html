@@ -48,7 +48,7 @@
                                     {{appointment.stuff.surname}}</span></li>
                         </ol>
                         <div class="widget-49-meeting-action">
-                            <button class="btn btn-sm btn-flash-border-primary"
+                            <button [disabled]="appointment.cancelledByClient" class="btn btn-sm btn-primary"
                                 (click)="bookAppointment(appointment.id)">Zakaži termin</button>
                         </div>
                     </div>

@@ -22,6 +22,6 @@ public interface BloodCenterAppointmentRepository extends JpaRepository<BloodCen
 	@QueryHints({ @QueryHint(name = "javax.persistence.lock.timeout", value = "0") })
 	BloodCenterAppointment findOneById(Long id);
 
-	List<BloodCenterAppointment> getByCenterAndClientNullAndIsDeletedFalse(BloodTransfusionCenter center);
+	List<BloodCenterAppointment> getByCenterAndIsReservedFalseAndIsDeletedFalse(BloodTransfusionCenter center);
 
 }

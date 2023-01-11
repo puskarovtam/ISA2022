@@ -40,6 +40,8 @@ public class BloodCenterAppointment {
 	private Boolean isCompleted = false;
 	@Column(name = "appointment_is_canceled")
 	private Boolean isCanceled = false;
+	@Column(name = "appointment_is_reserved")
+	private Boolean isReserved = false;
 	@Column(name = "appointment_is_deleted")
 	private Boolean isDeleted = false;
 
@@ -108,6 +110,14 @@ public class BloodCenterAppointment {
 
 	public void setIsCanceled(Boolean isCanceled) {
 		this.isCanceled = isCanceled;
+	}
+
+	public Boolean getIsReserved() {
+		return isReserved;
+	}
+
+	public void setIsReserved(Boolean isReserved) {
+		this.isReserved = isReserved;
 	}
 
 	public Boolean getIsDeleted() {

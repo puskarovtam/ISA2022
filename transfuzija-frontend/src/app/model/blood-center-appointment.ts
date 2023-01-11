@@ -9,4 +9,6 @@ export class BloodCenterAppointment {
     center!: BloodTransfusionCenter;
     client!: RegisteredClient;
     stuff!: BloodCenterAdministrator;
+    cancel: boolean = true;
+    cancelledByClient: boolean = false;
 }

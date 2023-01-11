@@ -21,4 +21,6 @@ public interface BloodCenterAppointmentService {
 
 	BloodCenterAppointmentDTO cancelAppointment(Long clientId, Long appointmentId);
 
+	Boolean clientHasCancelledAppointment(Long clientId, Long appointmentId);
+
 }

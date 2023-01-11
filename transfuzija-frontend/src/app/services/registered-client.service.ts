@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BloodCenterAppointment } from '../model/blood-center-appointment';
 
 const REGISTERED_CLIENTS_API =
   'http://localhost:8080/api/clients/';
@@ -28,7 +29,7 @@ export class RegisteredClientService {
   }
 
   findUpcomingAppointments(id: any){
-    return this.http.get(`${REGISTERED_CLIENTS_API}` + `${id}/upcoming-appointments`);
+    return this.http.get<BloodCenterAppointment[]>(`${REGISTERED_CLIENTS_API}` + `${id}/upcoming-appointments`);
   }
 
   findPastAppointments(id: any){
