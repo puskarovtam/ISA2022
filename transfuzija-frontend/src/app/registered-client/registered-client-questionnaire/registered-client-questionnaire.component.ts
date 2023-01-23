@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { QuestionnaireService } from 'src/app/services/questionnaire.service';
 import { RegisteredClientService } from 'src/app/services/registered-client.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -11,31 +13,49 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 export class RegisteredClientQuestionnaireComponent implements OnInit {
   questionnaireForm!: FormGroup;
   submitted = false;
+  change: boolean = false;
   id: any;
+  korisnik: any;
 
   constructor(private clientService: RegisteredClientService,
     private tokenStorage: TokenStorageService,
-    private formBuilder: FormBuilder
+    private questionnaireService: QuestionnaireService,
+    private formBuilder: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.questionnaireForm = this.formBuilder.group({
-      question1: [],
-      question2: [],
-      question3: [],
-      question4: [],
-      question5: [],
-      question6: [],
-      question7: [],
-      question8: [],
-      question9: [],
-      question10: [],
-      question11: [],
-      question12: [],
-      question13: [],
-      question14: [],
+    this.clientService.findClientById(this.tokenStorage.getUser().id).subscribe((data) => {
+      this.korisnik = data;
+
+      this.questionnaireForm = this.formBuilder.group({
+        question1: [],
+        question2: [],
+        question3: [],
+        question4: [],
+        question5: [],
+        question6: [],
+        question7: [],
+        question8: [],
+        question9: [],
+        question10: [],
+        question11: [],
+        question12: [],
+        question13: [],
+        question14: [],
+      });
+
+      if (this.korisnik.questionnaireCompleted) {
+        console.log("ULAZIMMMMM")
+        this.change = !this.change;
+        this.questionnaireService.findQuestionnaireById(this.korisnik.questionnaireId).subscribe((data) => {
+          this.questionnaireForm.patchValue(data);
+        });
+      }
     });
   }
+
+  get f() { return this.questionnaireForm.controls; }
 
   onSubmit() {
     var questionnaireDTO = {
@@ -58,7 +78,7 @@ export class RegisteredClientQuestionnaireComponent implements OnInit {
     this.id = this.tokenStorage.getUser().id;
 
     this.clientService.saveQuestionnaire(this.id, questionnaireDTO).subscribe((data) => {
-      console.table(data);
+      this.router.navigate(['registered-client']);
     });
   }
 

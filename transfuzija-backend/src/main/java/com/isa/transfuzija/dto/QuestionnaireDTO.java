@@ -1,5 +1,7 @@
 package com.isa.transfuzija.dto;
 
+import com.isa.transfuzija.model.Questionnaire;
+
 public class QuestionnaireDTO {
 
 	private Long id;
@@ -17,6 +19,29 @@ public class QuestionnaireDTO {
 	private Boolean question12;
 	private Boolean question13;
 	private Boolean question14;
+
+	public QuestionnaireDTO() {
+		super();
+	}
+
+	public QuestionnaireDTO(Questionnaire questionnaire) {
+		super();
+		this.id = questionnaire.getId();
+		this.question1 = questionnaire.getQuestion1();
+		this.question2 = questionnaire.getQuestion2();
+		this.question3 = questionnaire.getQuestion3();
+		this.question4 = questionnaire.getQuestion4();
+		this.question5 = questionnaire.getQuestion5();
+		this.question6 = questionnaire.getQuestion6();
+		this.question7 = questionnaire.getQuestion7();
+		this.question8 = questionnaire.getQuestion8();
+		this.question9 = questionnaire.getQuestion9();
+		this.question10 = questionnaire.getQuestion10();
+		this.question11 = questionnaire.getQuestion11();
+		this.question12 = questionnaire.getQuestion12();
+		this.question13 = questionnaire.getQuestion13();
+		this.question14 = questionnaire.getQuestion14();
+	}
 
 	public Long getId() {
 		return id;

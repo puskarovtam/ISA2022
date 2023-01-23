@@ -33,6 +33,6 @@ export class RegisteredClientService {
   }
 
   findPastAppointments(id: any){
-    return this.http.get(`${REGISTERED_CLIENTS_API}` + `${id}/past-appointments`);
+    return this.http.get<BloodCenterAppointment[]>(`${REGISTERED_CLIENTS_API}` + `${id}/past-appointments`);
   }
 }

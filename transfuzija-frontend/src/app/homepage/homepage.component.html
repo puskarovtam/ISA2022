@@ -28,7 +28,8 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="rating">Ocena centra za transfuziju</label>
-                        <input style="width: 230px;" type="range" [(ngModel)]="filters.rating" class="form-range me-2" min="0" max="5" id="rating">{{filters.rating}}
+                        <input style="width: 230px;" type="range" [(ngModel)]="filters.rating" class="form-range me-2"
+                            min="0" max="5" id="rating">{{filters.rating}}
                     </div>
                 </div>
             </div>
@@ -46,6 +47,9 @@
                 <hr>
                 <p style="text-align: left;">{{bloodCenter.description}}</p>
             </div>
+        </div>
+        <div *ngIf="bloodCenters.length == 0">
+            <p><b>Nema centrova za transfuziju za prikazivanje.</b></p>
         </div>
     </div>
 </div>

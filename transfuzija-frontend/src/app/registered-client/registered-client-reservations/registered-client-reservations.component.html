@@ -49,11 +49,15 @@
                                     {{appointment.stuff.surname}}</span></li>
                         </ol>
                         <div class="widget-49-meeting-action">
-                            <button [disabled]="!appointment.cancel" class="btn btn-sm btn-primary" (click)="cancelAppointment(appointment)">Otkaži termin</button>
+                            <button [disabled]="!appointment.cancel" class="btn btn-sm btn-primary"
+                                (click)="cancelAppointment(appointment)">Otkaži termin</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row mt-5 text-center" *ngIf="appointments.length == 0">
+        <p><b>Ne postoji nijedan rezervisan termin.</b></p>
     </div>
 </div>

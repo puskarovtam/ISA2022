@@ -28,8 +28,10 @@ public class RegisteredClient extends User {
 	@Column(name = "registered_penalties")
 	private Integer penalties = 0;
 	@OneToOne
-	@JoinColumn(name = "questionnaire_id", referencedColumnName = "id")
+	@JoinColumn(name = "questionnaire_id", referencedColumnName = "id", nullable = true)
 	private Questionnaire questionnaire;
+	@Column(name = "questionnaire_completed")
+	private Boolean questionnaireCompleted = false;
 	@OneToMany(mappedBy = "client")
 	@JsonManagedReference
 	private Set<BloodCenterAppointment> bloodCenterAppointments;
@@ -88,6 +90,14 @@ public class RegisteredClient extends User {
 
 	public void setQuestionnaire(Questionnaire questionnaire) {
 		this.questionnaire = questionnaire;
+	}
+
+	public Boolean getQuestionnaireCompleted() {
+		return questionnaireCompleted;
+	}
+
+	public void setQuestionnaireCompleted(Boolean questionnaireCompleted) {
+		this.questionnaireCompleted = questionnaireCompleted;
 	}
 
 	public Set<BloodCenterAppointment> getBloodCenterAppointments() {

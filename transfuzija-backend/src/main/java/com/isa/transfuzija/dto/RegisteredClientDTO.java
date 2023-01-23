@@ -23,6 +23,8 @@ public class RegisteredClientDTO extends UserDTO {
 	private String jobInformation;
 	private Boolean blocked = false;
 	private Integer penalties = 0;
+	private Long questionnaireId;
+	private Boolean questionnaireCompleted;
 	protected Long version;
 
 	public RegisteredClientDTO() {
@@ -45,6 +47,10 @@ public class RegisteredClientDTO extends UserDTO {
 		this.gender = client.getGender();
 		this.occupation = client.getOccupation();
 		this.jobInformation = client.getJobInformation();
+		if (client.getQuestionnaire() != null) {
+			this.questionnaireId = client.getQuestionnaire().getId();
+		}
+		this.questionnaireCompleted = client.getQuestionnaireCompleted();
 	}
 
 	public Long getId() {
@@ -165,6 +171,22 @@ public class RegisteredClientDTO extends UserDTO {
 
 	public void setPenalties(Integer penalties) {
 		this.penalties = penalties;
+	}
+
+	public Long getQuestionnaireId() {
+		return questionnaireId;
+	}
+
+	public void setQuestionnaireId(Long questionnaireId) {
+		this.questionnaireId = questionnaireId;
+	}
+
+	public Boolean getQuestionnaireCompleted() {
+		return questionnaireCompleted;
+	}
+
+	public void setQuestionnaireCompleted(Boolean questionnaireCompleted) {
+		this.questionnaireCompleted = questionnaireCompleted;
 	}
 
 	public Long getVersion() {

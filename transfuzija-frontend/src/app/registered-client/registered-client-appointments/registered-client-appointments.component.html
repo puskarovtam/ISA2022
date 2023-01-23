@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <div class="row mt-3">
-        <h5>Dostupni termini u {{appointments[0].center.name}}</h5>
+        <h5>Dostupni termini za rezervaciju</h5>
     </div>
 
     <div class="row mt-3 mb-5">
@@ -55,5 +55,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row mt-5 text-center" *ngIf="appointments.length == 0">
+        <p><b>Ne postoje termin za rezervaciju.</b></p>
     </div>
 </div>

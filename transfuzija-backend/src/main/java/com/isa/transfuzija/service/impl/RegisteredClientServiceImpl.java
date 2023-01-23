@@ -97,6 +97,7 @@ public class RegisteredClientServiceImpl implements RegisteredClientService {
 		questionnaireRepository.save(questionnaire);
 
 		client.setQuestionnaire(questionnaire);
+		client.setQuestionnaireCompleted(true);
 
 		registeredClientRepository.save(client);
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BloodCenterAppointment } from 'src/app/model/blood-center-appointment';
 import { RegisteredClientService } from 'src/app/services/registered-client.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -8,7 +9,7 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
   styleUrls: ['./registered-client-centers-history.component.css']
 })
 export class RegisteredClientCentersHistoryComponent implements OnInit {
-  appointments: any;
+  appointments: BloodCenterAppointment[] = [];
   sort: string = 'NO_SORT';
 
   constructor(private tokenStorage: TokenStorageService,
