@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.isa.transfuzija.dto.BloodCenterAdministratorDTO;
 import com.isa.transfuzija.dto.RegisterDTO;
 import com.isa.transfuzija.dto.UserDTO;
 import com.isa.transfuzija.enums.RoleName;
@@ -117,7 +118,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User addCenterAdmin(BloodCenterAdministrator admin) {
+	public User addCenterAdmin(BloodCenterAdministratorDTO admin) {
 		BloodCenterAdministrator bca = new BloodCenterAdministrator();
 		bca.setEmail(admin.getEmail());
 		bca.setPassword(passwordEncoder.encode("123456"));

@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isa.transfuzija.dto.BloodCenterAdministratorDTO;
 import com.isa.transfuzija.dto.LoginDTO;
 import com.isa.transfuzija.dto.RegisterDTO;
 import com.isa.transfuzija.dto.UserDTO;
-import com.isa.transfuzija.model.BloodCenterAdministrator;
 import com.isa.transfuzija.model.SystemAdministrator;
 import com.isa.transfuzija.model.User;
 import com.isa.transfuzija.repository.UserRepository;
@@ -116,7 +116,7 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/addCenter")
-	public ResponseEntity<?> center(@Valid @RequestBody BloodCenterAdministrator admin) {
+	public ResponseEntity<?> center(@Valid @RequestBody BloodCenterAdministratorDTO admin) {
 		if (userRepository.existsByEmail(admin.getEmail())) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
 		}
