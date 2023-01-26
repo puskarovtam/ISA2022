@@ -46,7 +46,6 @@ export class RegisteredClientQuestionnaireComponent implements OnInit {
       });
 
       if (this.korisnik.questionnaireCompleted) {
-        console.log("ULAZIMMMMM")
         this.change = !this.change;
         this.questionnaireService.findQuestionnaireById(this.korisnik.questionnaireId).subscribe((data) => {
           this.questionnaireForm.patchValue(data);

@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 const TOKEN_KEY = 'auth-token';
@@ -7,7 +8,7 @@ const USER_KEY = 'auth-user';
   providedIn: 'root',
 })
 export class TokenStorageService {
-  constructor() {}
+  constructor() { }
 
   logOut(): void {
     window.sessionStorage.clear();
@@ -33,5 +34,14 @@ export class TokenStorageService {
       return JSON.parse(user);
     }
     return {};
+  }
+
+  public getHeaders() {
+    const JWT = this.getToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ` + JWT,
+    });
+    return headers;
   }
 }

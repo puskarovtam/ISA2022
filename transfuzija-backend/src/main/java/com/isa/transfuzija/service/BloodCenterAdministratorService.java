@@ -11,5 +11,7 @@ public interface BloodCenterAdministratorService {
 	List<BloodCenterAdministratorDTO> findAllByCenter(Long bloodCenterId);
 	
 	BloodCenterAdministratorDTO findById(Long id);
+	
+	void editCenterAdministrator(BloodCenterAdministratorDTO centerAdminDTO);
 
 }

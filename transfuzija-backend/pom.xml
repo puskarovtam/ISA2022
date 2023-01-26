@@ -44,7 +44,7 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
-		
+
 		<!-- QR CODE -->
 		<dependency>
 			<groupId>com.google.zxing</groupId>
@@ -57,7 +57,6 @@
 			<artifactId>javase</artifactId>
 			<version>3.4.1</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>com.mysql</groupId>

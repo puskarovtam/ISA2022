@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,11 +34,13 @@ public class RegisteredClientController {
 	}
 
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAuthority('REGISTERED_CLIENT')")
 	public RegisteredClientDTO findClientById(@PathVariable Long id) {
 		return registeredClientService.findById(id);
 	}
 
 	@PutMapping
+	@PreAuthorize("hasAuthority('REGISTERED_CLIENT')")
 	public ResponseEntity<?> editRegisteredClient(@RequestBody RegisteredClientDTO clientDTO) {
 		if (clientDTO != null) {
 			registeredClientService.editRegisteredClient(clientDTO);
@@ -47,12 +50,14 @@ public class RegisteredClientController {
 	}
 
 	@PostMapping("/{id}/questionnaire")
+	@PreAuthorize("hasAuthority('REGISTERED_CLIENT')")
 	public ResponseEntity<?> saveQuestionnaire(@PathVariable Long id, @RequestBody QuestionnaireDTO questionnaireDTO) {
 		registeredClientService.saveQuestionnaire(id, questionnaireDTO);
 		return new ResponseEntity<>(questionnaireDTO, HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}/upcoming-appointments")
+	@PreAuthorize("hasAuthority('REGISTERED_CLIENT')")
 	public ResponseEntity<List<BloodCenterAppointmentDTO>> findUpcomingClientAppointments(@PathVariable Long id) {
 		List<BloodCenterAppointment> appointments = registeredClientService.getUpcomingClientAppointment(id);
 		List<BloodCenterAppointmentDTO> dtos = new ArrayList<>();
@@ -64,6 +69,7 @@ public class RegisteredClientController {
 	}
 
 	@GetMapping("/{id}/past-appointments")
+	@PreAuthorize("hasAuthority('REGISTERED_CLIENT')")
 	public ResponseEntity<List<BloodCenterAppointmentDTO>> findPastClientAppointments(@PathVariable Long id) {
 		List<BloodCenterAppointment> appointments = registeredClientService.getPastClientAppointment(id);
 		List<BloodCenterAppointmentDTO> dtos = new ArrayList<>();

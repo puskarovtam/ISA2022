@@ -25,7 +25,6 @@ export class RegisteredClientCenterPageComponent implements OnInit {
   }
 
   scheduleAppointment(center_id: any){
-    console.log("Kliknut sam u zakazivanju");
     this.router.navigate([`registered-client/center/appointment-list/${center_id}`]);
   }
 

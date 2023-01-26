@@ -29,6 +29,6 @@ export class BloodCenterAdminDashboardComponent implements OnInit {
 
   logOut() {
     this.tokenStorage.logOut();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 }

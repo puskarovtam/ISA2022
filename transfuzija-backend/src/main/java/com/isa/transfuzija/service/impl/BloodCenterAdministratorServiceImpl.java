@@ -3,6 +3,8 @@ package com.isa.transfuzija.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +48,25 @@ public class BloodCenterAdministratorServiceImpl implements BloodCenterAdministr
 		BloodCenterAdministrator admin = bloodCenterAdministratorRepository.findById(id).get();
 		BloodCenterAdministratorDTO adminDTO = new BloodCenterAdministratorDTO(admin);
 		return adminDTO;
+	}
+
+	@Override
+	public void editCenterAdministrator(BloodCenterAdministratorDTO centerAdminDTO) {
+		BloodCenterAdministrator admin = bloodCenterAdministratorRepository.findById(centerAdminDTO.getId()).get();
+
+		if (admin != null) {
+			admin.setName(centerAdminDTO.getName());
+			admin.setSurname(centerAdminDTO.getSurname());
+			admin.setAddress(centerAdminDTO.getAddress());
+			admin.setCity(centerAdminDTO.getCity());
+			admin.setCountry(centerAdminDTO.getCountry());
+			admin.setPhoneNumber(centerAdminDTO.getPhoneNumber());
+
+			bloodCenterAdministratorRepository.save(admin);
+		} else {
+			throw new ValidationException("Center administrator does not exist.");
+		}
+
 	}
 
 }

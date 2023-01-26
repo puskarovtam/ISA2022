@@ -20,11 +20,12 @@ export class RegisteredClientDashboardComponent implements OnInit {
     this.clientService.findClientById(this.tokenStorage.getUser().id).subscribe((data) => {
       this.user = data;
     });
+    alert("Molimo Vas da popunite upitnik da biste mogli da zakazujete termine!");
   }
 
   logOut() {
     this.tokenStorage.logOut();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 
 }

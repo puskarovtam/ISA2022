@@ -1,1 +1,130 @@
-<p>blood-center-admin-profile works!</p>
+<div class="container mt-5">
+    <div class="container my-5 text-end">
+        <button class="btn btn-primary mx-2" *ngIf="change" (click)="enableChanges()">Izmeni podatke</button>
+        <!-- <button class="btn btn-primary mx-2" *ngIf="change" (click)="passwordChange()">Izmeni password</button> -->
+    </div>
+    <div class="row text-center">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Profil korisnika: {{centerAdmin.name}} {{centerAdmin.surname}}</h5>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="centerAdminProfileForm" (ngSubmit)="saveChanges()">
+                    <fieldset [disabled]="change">
+                        <fieldset [disabled]="true">
+                            <div class="form-floating mb-3">
+                                <input type="email" name="email"
+                                    [ngClass]="{'is-invalid': submitted && centerAdminProfileForm.controls.email.errors }"
+                                    class="form-control" formControlName="email" placeholder="name@example.com">
+                                <label for="email">Email adresa</label>
+                                <div *ngIf="submitted && centerAdminProfileForm.controls.email.errors"
+                                    class="invalid-feedback">
+                                    <div *ngIf="centerAdminProfileForm.controls.email.errors.required">Email je
+                                        obavezan.
+                                    </div>
+                                    <div *ngIf="centerAdminProfileForm.controls.email.errors.email">Email mora da bude
+                                        validna
+                                        email adresa.</div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="name"
+                                        [ngClass]="{'is-invalid': submitted && centerAdminProfileForm.controls.name.errors }"
+                                        class="form-control" formControlName="name" id="name"
+                                        placeholder="Enter your name">
+                                    <label for="name">Ime</label>
+                                    <div *ngIf="submitted && centerAdminProfileForm.controls.name.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="centerAdminProfileForm.controls.name.errors.required">Ime je
+                                            obavezno.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="surname"
+                                        [ngClass]="{'is-invalid': submitted && centerAdminProfileForm.controls.surname.errors }"
+                                        class="form-control" formControlName="surname" id="surname"
+                                        placeholder="Enter your surname">
+                                    <label for="surname">Prezime</label>
+                                    <div *ngIf="submitted && centerAdminProfileForm.controls.surname.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="centerAdminProfileForm.controls.surname.errors.required">Prezime je
+                                            obavezno.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" name="address"
+                                [ngClass]="{'is-invalid': submitted && centerAdminProfileForm.controls.address.errors }"
+                                class="form-control" formControlName="address" id="address"
+                                placeholder="Enter your address">
+                            <label for="address">Adresa</label>
+                            <div *ngIf="submitted && centerAdminProfileForm.controls.address.errors"
+                                class="invalid-feedback">
+                                <div *ngIf="centerAdminProfileForm.controls.address.errors.required">Adresa je obavezna.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="city"
+                                        [ngClass]="{'is-invalid': submitted && centerAdminProfileForm.controls.city.errors }"
+                                        class="form-control" formControlName="city" id="city"
+                                        placeholder="Enter your city">
+                                    <label for="city">Grad</label>
+                                    <div *ngIf="submitted && centerAdminProfileForm.controls.city.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="centerAdminProfileForm.controls.city.errors.required">Grad je
+                                            obavezan.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="country"
+                                        [ngClass]="{'is-invalid': submitted && centerAdminProfileForm.controls.country.errors }"
+                                        class="form-control" formControlName="country" id="country"
+                                        placeholder="Enter your country">
+                                    <label for="country">Država</label>
+                                    <div *ngIf="submitted && centerAdminProfileForm.controls.country.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="centerAdminProfileForm.controls.country.errors.required">Država je
+                                            obavezna.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" name="phoneNumber"
+                                [ngClass]="{'is-invalid': submitted && centerAdminProfileForm.controls.phoneNumber.errors }"
+                                class="form-control" formControlName="phoneNumber" id="phoneNumber"
+                                placeholder="Enter your phone number">
+                            <label for="phone">Telefon</label>
+                            <div *ngIf="submitted && centerAdminProfileForm.controls.phoneNumber.errors"
+                                class="invalid-feedback">
+                                <div *ngIf="centerAdminProfileForm.controls.phoneNumber.errors.required">Telefon je
+                                    obavezan.</div>
+                            </div>
+                        </div>
+
+                        <div style="float: right;">
+                            <button class="btn btn-primary mb-2 mx-2" type="submit" *ngIf="!change">Izmeni</button>
+                            <button class="btn btn-secondary mb-2 mx-2" *ngIf="!change"
+                                (click)="cancelChanges()">Odustani</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

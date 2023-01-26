@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,17 +32,20 @@ public class BloodTransfusionCenterController {
 	}
 
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAuthority('CENTER_ADMINISTRATOR') or hasAuthority('REGISTERED_CLIENT')")
 	public ResponseEntity<?> getCenter(@PathVariable Long id) {
 		return new ResponseEntity<BloodTransfusionCenterDTO>(bloodTransfusionCenterService.findById(id), HttpStatus.OK);
 	}
 
 	@PostMapping
+	@PreAuthorize("hasAuthority('CENTER_ADMINISTRATOR')")
 	public ResponseEntity<?> addCenter(@RequestBody BloodTransfusionCenterDTO centerDTO) {
 		bloodTransfusionCenterService.save(centerDTO);
 		return ResponseEntity.ok(new MessageResponse("Blood transfusion center successfully added."));
 	}
 
 	@PutMapping
+	@PreAuthorize("hasAuthority('CENTER_ADMINISTRATOR')")
 	public void updateCenter(@RequestBody BloodTransfusionCenterDTO centerDTO) {
 		bloodTransfusionCenterService.update(centerDTO);
 	}

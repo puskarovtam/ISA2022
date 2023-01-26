@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ public class BloodCenterAppointmentController {
 	private BloodCenterAppointmentService bloodCenterAppointmentService;
 
 	@GetMapping("/center/{id}")
+	@PreAuthorize("hasAuthority('CENTER_ADMINISTRATOR') or hasAuthority('REGISTERED_CLIENT')")
 	public ResponseEntity<List<BloodCenterAppointmentDTO>> getAppointmentsByCenterId(@PathVariable Long id) {
 		List<BloodCenterAppointmentDTO> appointmentsDTO = bloodCenterAppointmentService
 				.findAllBloodCenterAppointments(id);
@@ -34,12 +36,14 @@ public class BloodCenterAppointmentController {
 	}
 
 	@PostMapping
+	@PreAuthorize("hasAuthority('CENTER_ADMINISTRATOR')")
 	public ResponseEntity<?> createAppointment(@RequestBody BloodCenterAppointmentCreateDTO appointmentDTO) {
 		bloodCenterAppointmentService.save(appointmentDTO);
 		return new ResponseEntity<>(appointmentDTO, HttpStatus.OK);
 	}
 
 	@PutMapping("/book/{clientId}/{appointmentId}")
+	@PreAuthorize("hasAuthority('REGISTERED_CLIENT')")
 	public ResponseEntity<?> bookAppointment(@PathVariable Long clientId, @PathVariable Long appointmentId) {
 		if (clientId == null || appointmentId == null) {
 			return new ResponseEntity<>("Invalid id", HttpStatus.BAD_REQUEST);
@@ -55,6 +59,7 @@ public class BloodCenterAppointmentController {
 	}
 
 	@DeleteMapping("/cancel/{clientId}/{appointmentId}")
+	@PreAuthorize("hasAuthority('REGISTERED_CLIENT')")
 	public ResponseEntity<?> cancelAppointment(@PathVariable Long clientId, @PathVariable Long appointmentId) {
 		if (clientId == null || appointmentId == null) {
 			return new ResponseEntity<>("Invalid id", HttpStatus.BAD_REQUEST);
@@ -66,6 +71,7 @@ public class BloodCenterAppointmentController {
 	}
 
 	@GetMapping("/has-cancelled/{clientId}/{appointmentId}")
+	@PreAuthorize("hasAuthority('REGISTERED_CLIENT')")
 	public Boolean cancelledByClient(@PathVariable Long clientId, @PathVariable Long appointmentId) {
 		return bloodCenterAppointmentService.clientHasCancelledAppointment(clientId, appointmentId);
 	}

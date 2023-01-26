@@ -1,5 +1,6 @@
 package com.isa.transfuzija.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.dao.PessimisticLockingFailureException;
@@ -22,5 +23,7 @@ public interface BloodCenterAppointmentService {
 	BloodCenterAppointmentDTO cancelAppointment(Long clientId, Long appointmentId);
 
 	Boolean clientHasCancelledAppointment(Long clientId, Long appointmentId);
+	
+	Boolean clientHasAlreadyAppointmentInThatTime(Long clientId, LocalDateTime timeOfAppointment);
 
 }

@@ -1,6 +1,7 @@
 package com.isa.transfuzija.service.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -26,6 +27,7 @@ import com.isa.transfuzija.repository.BloodCenterAppointmentRepository;
 import com.isa.transfuzija.repository.BloodTransfusionCenterRepository;
 import com.isa.transfuzija.repository.RegisteredClientRepository;
 import com.isa.transfuzija.service.BloodCenterAppointmentService;
+import com.isa.transfuzija.service.DateService;
 import com.isa.transfuzija.service.EmailService;
 import com.isa.transfuzija.service.QrCodeService;
 
@@ -44,6 +46,8 @@ public class BloodCenterAppointmentServiceImpl implements BloodCenterAppointment
 	private QrCodeService qrCodeService;
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private DateService dateService;
 
 	@Override
 	public List<BloodCenterAppointmentDTO> findAllBloodCenterAppointments(Long bloodCenterId) {
@@ -109,9 +113,11 @@ public class BloodCenterAppointmentServiceImpl implements BloodCenterAppointment
 		}
 
 		if (!appointment.getIsReserved()) {
-			appointment.setClient(client.get());
-			appointment.setIsCanceled(false);
-			appointment.setIsReserved(true);
+			if (client.get().getQuestionnaireCompleted()) {
+				appointment.setClient(client.get());
+				appointment.setIsCanceled(false);
+				appointment.setIsReserved(true);
+			}
 		}
 
 		BloodCenterAppointment bca = bloodCenterAppointmentRepository.save(appointment);
@@ -166,6 +172,22 @@ public class BloodCenterAppointmentServiceImpl implements BloodCenterAppointment
 		for (BloodCenterAppointment app : client.getBloodCenterAppointments()) {
 			if (app.equals(appointment)) {
 				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean clientHasAlreadyAppointmentInThatTime(Long clientId, LocalDateTime timeOfAppointment) {
+		RegisteredClient client = registeredClientRepository.findById(clientId).get();
+
+		if (client != null) {
+			for (BloodCenterAppointment appointment : client.getBloodCenterAppointments()) {
+				if (!appointment.getIsCanceled()) {
+					if (dateService.doDatesOverlap(appointment.getAppointmentStart(), timeOfAppointment)) {
+						return true;
+					}
+				}
 			}
 		}
 		return false;

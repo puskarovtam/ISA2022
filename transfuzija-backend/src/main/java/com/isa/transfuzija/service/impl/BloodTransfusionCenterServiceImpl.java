@@ -50,7 +50,7 @@ public class BloodTransfusionCenterServiceImpl implements BloodTransfusionCenter
 
 	@Override
 	public void update(BloodTransfusionCenterDTO centerDTO) {
-		BloodTransfusionCenter btc = bloodTransfusionCenterRepository.getOne(centerDTO.getId());
+		BloodTransfusionCenter btc = bloodTransfusionCenterRepository.findById(centerDTO.getId()).get();
 		btc.setName(centerDTO.getName());
 		btc.setAddress(centerDTO.getAddress());
 		btc.setCity(centerDTO.getCity());
